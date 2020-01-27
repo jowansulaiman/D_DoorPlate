@@ -7,10 +7,9 @@
 #include <sql.h>
 #include <string.h>
 
-
 class DBConn {
 private:
-	SQLCHAR* SQLState[1024];
+	SQLCHAR SQLState[1024];
 	SQLCHAR message[1024];
 	SQLHANDLE SQLEnvHandle;
 	SQLHANDLE SQLConnectionHandle;

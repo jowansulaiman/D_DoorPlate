@@ -1,9 +1,11 @@
 #include <iostream>
 #include "DateTime.h"
+#include "DBConn.h"
 
 int main()
 {
-	Date d;
-	d._time();
-	d._date();
+	DBConn db;
+	db.getconn();
+	db.statment();
+
 }
