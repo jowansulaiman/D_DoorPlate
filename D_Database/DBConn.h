@@ -23,6 +23,10 @@ public:
 		SQLStatementHandle = NULL;
 		retCode = 0;
 	}
+	~DBConn() {
+
+	}
+
 	SQLHANDLE getconn();
 	void statment();
 	void showSQLError(unsigned int handleType, const SQLHANDLE& handle);

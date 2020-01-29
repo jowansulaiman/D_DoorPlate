@@ -21,15 +21,15 @@ public:
 		datum = new std::string;
 
 
-		/*std::cout << "\nGeben Sie den Namen einer Bilddatei mit der Extension ein: ";
-		std::cin >> */
-		*filename = "wor.jpg";
-		std::cout << "\ngibt der Name: ";
-		std::cin >> *name;
-		std::cout << "\nwelcher Raum: ";
-		std::cin >> *raum;
-		std::cout << "\nDasDAtum: ";
-		std::cin >> *datum;
+		//*std::cout << "\nGeben Sie den Namen einer Bilddatei mit der Extension ein: ";
+		//std::cin >> */
+		//*filename = "wor.jpg";
+		//std::cout << "\ngibt der Name: ";
+		//std::cin >> *name;
+		//std::cout << "\nwelcher Raum: ";
+		//std::cin >> *raum;
+		//std::cout << "\nDasDAtum: ";
+		//std::cin >> *datum;
 	}
 
 	image(std::string f, std::string n, std::string r, std::string d) {
@@ -45,6 +45,8 @@ public:
 	}
 
 	void readImg();
+	void convImg();
+	void findAndReplaceAll(std::string&, std::string, std::string);
 
 
 	~image() {

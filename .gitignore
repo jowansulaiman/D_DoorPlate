@@ -338,3 +338,8 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/XBM_Convert
+/XBM_Conversion
+/D_DoorPlate/BitmapExamples2.h
+/D_DoorPlate/BitmapExamples.h
+/D_DoorPlate/image.xbm
