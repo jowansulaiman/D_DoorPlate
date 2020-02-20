@@ -24,12 +24,18 @@
     <ClCompile Include="DateTime.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Raum.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Image.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="DateTime.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Raum.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
