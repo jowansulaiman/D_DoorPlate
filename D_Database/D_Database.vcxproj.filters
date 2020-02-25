@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="D_Database.cpp">
+    <ClCompile Include="Database.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\D_Database1\DBConn.cpp">
+    <ClCompile Include="DBmain.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\D_Database1\DBConn.h">
+    <ClInclude Include="Database.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
