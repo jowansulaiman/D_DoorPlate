@@ -18,8 +18,8 @@ class Connection {
  public:
   Connection();
   Connection(const char *, const char *, const char *, const char *);
-  void Connect();
-  void Query();
+  void inline Connect();
+  std::pair<char const *, char const *> Query();
   void Check_Error();
   void Disconnect();
 

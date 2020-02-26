@@ -28,7 +28,7 @@ void Database::Connection::Check_Error() {
   }
 }
 
-void Database::Connection::Connect() {
+void inline Database::Connection::Connect() {
   Check_Error();     /* mit dem Server verbinden */
   mysql_real_connect(m_Connect, m_Server, m_User, m_Pass, m_DB, 0, 0, 0);
   Check_Error();
@@ -39,13 +39,14 @@ void Database::Connection::Disconnect() {
    } 
 }
   
-void Database::Connection::Query() {
+std::pair<char const*, char const*> Database::Connection::Query() {
   unsigned long length = 0;
   Connect();
   const char* m_Query;
   MYSQL_RES* result;
   MYSQL_ROW row;
   int state;
+  
   state = mysql_query(m_Connect, "SELECT * FROM kunde");
   if (state != 0) {
     printf(mysql_error(m_Connect));
@@ -54,14 +55,24 @@ void Database::Connection::Query() {
   /* must call mysql_store_result() before we can issue any * other query
        calls */
   result = mysql_store_result(m_Connect);
-  std::cout << "Rows: " << mysql_num_rows(result)
-            << std::endl; /* process each row in the result set */
+  /*std::cout << "Rows: " << mysql_num_rows(result)
+            << std::endl;*/ /* process each row in the result set */
   while ((row = mysql_fetch_row(result)) != NULL) {
-    std::cout << "id: " << (row[0] ? row[0] : "NULL") << " "
-              << "val : " << (row[1] ? row[1] : "NULL") << std::endl;
+   /* std::cout << "id: " << (row[0] ? row[0] : "NULL") << " "
+              << "val : " << (row[1] ? row[1] : "NULL") << std::endl;*/
+    std::pair<char const*, char const*> t;
+   
+    char const* id = (char const*)row[0];
+    char const* txt = (char const*)row[1];
+    t = std::make_pair(id, txt);
+    Disconnect();
+   return t;
     
-  }                          /* free the result set */
-  mysql_free_result(result); /* close the connection */
+  }       
+  
+  /* free the result set */
+  mysql_free_result(result); 
+  /* close the connection */
   mysql_close(m_Connect);
   printf("Done.\n");
 }
