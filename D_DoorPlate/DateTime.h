@@ -6,16 +6,20 @@
 #include <memory>
 
 namespace DautmUhrzeit {
-	class UhrZeit {
+	__interface I_CheckErr
+	{
+		bool Check_Err();
+	};
+
+	class UhrZeit:public I_CheckErr {
 	private :
 		unsigned int m_Sec;
 		unsigned int m_Minute;
 		unsigned int m_Uhr;
+
 	public:
 		UhrZeit();
 		UhrZeit(unsigned int, unsigned int, unsigned int);
-
-
 	};
 	class Datum {
 	private:

@@ -1,6 +1,9 @@
 #ifndef  D_Raum
 #define D_Raum
 #include "DateTime.h"
+#include "Image.h"
+
+
 
 class Raum {
 private:
@@ -12,6 +15,6 @@ public:
 	Raum();
 	Raum(int, std::string);
 	~Raum();
-
+	
 };
 #endif // ! D_Raum
