@@ -51,7 +51,7 @@ Database::Statement::Statement()
 Database::Statement::Statement(const char* Query) : m_Query(Query) {}
 Database::Statement::~Statement() { }
 std::pair<char const*, char const*> Database::Statement::Query() {
-
+    
     Connect();
     int state;
     state = mysql_query(m_Connect, "SELECT  * FROM kunde order by id desc");
@@ -78,6 +78,6 @@ std::pair<char const*, char const*> Database::Statement::Query() {
     /* free the result set */
     mysql_free_result(result);
 
-
+    
     printf("Done.\n");
 }

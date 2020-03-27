@@ -1,1 +1,1 @@
-magick image.png image.xbm
+magick Türschild.png image.xbm

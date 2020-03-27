@@ -159,13 +159,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DateTime.cpp" />
+    <ClCompile Include="DautmUhrzeit.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Raum.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DateTime.h" />
+    <ClInclude Include="DautmUhrzeit.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Raum.h" />
   </ItemGroup>

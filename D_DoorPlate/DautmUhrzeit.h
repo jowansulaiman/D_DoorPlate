@@ -6,12 +6,9 @@
 #include <memory>
 
 namespace DautmUhrzeit {
-	__interface I_CheckErr
-	{
-		bool Check_Err();
-	};
 
-	class UhrZeit:public I_CheckErr {
+
+	class UhrZeit {
 	private :
 		unsigned int m_Sec;
 		unsigned int m_Minute;
@@ -20,23 +17,21 @@ namespace DautmUhrzeit {
 	public:
 		UhrZeit();
 		UhrZeit(unsigned int, unsigned int, unsigned int);
+		void getSEc(){}
 	};
 	class Datum {
 	private:
-		int m_Tag,
+		UhrZeit m_start;
+		UhrZeit m_end;
+		unsigned int m_Tag,
 			m_Monat,
 			m_Jahr;
-
-		char tmpbuf[128], timebuf[26], ampm[4] = "AM";
-		time_t ltime;
-		struct _timeb tstruct;
-		struct tm today, gmt, xmas = { 0, 0, 12, 25, 11, 93 };
-		errno_t err;
 	
 	public:
 		Datum();
-		Datum(int, int, int);
+		Datum(unsigned int, unsigned int, unsigned int);
 		~Datum();
+
 
 		bool chec_Time();
 		int _time();
@@ -57,6 +52,9 @@ namespace DautmUhrzeit {
 		ZeitStempel();
 		ZeitStempel(int, int, int);
 		~ZeitStempel();
+		void test() {
+		
+		}
 	};
 }
 #endif // !D_DateTime

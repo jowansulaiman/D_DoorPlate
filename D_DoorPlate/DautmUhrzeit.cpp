@@ -1,4 +1,4 @@
-#include "DateTime.h"
+#include "DautmUhrzeit.h"
 #include <iostream>
 
 #include <time.h>
@@ -17,7 +17,7 @@ DautmUhrzeit::UhrZeit::UhrZeit(unsigned int Sec, unsigned int Min, unsigned int 
 }
 
 
-DautmUhrzeit::Datum::Datum(int d, int mo, int y)
+DautmUhrzeit::Datum::Datum(unsigned int d, unsigned  int mo, unsigned int y)
     :  m_Tag(d), m_Monat(mo),m_Jahr(y) {}
 DautmUhrzeit::Datum::Datum() { std::cout << std::endl << "Con" << std::endl; }
 DautmUhrzeit::Datum::~Datum() { std::cout << std::endl << "Dis" << std::endl; }
@@ -27,11 +27,12 @@ bool DautmUhrzeit::Datum::chec_Time() {
 }
 
 int DautmUhrzeit::Datum::_time() {
-
+    
   // Anzeige von Uhrzeit im Stil des Betriebssystems.
-    _strtime_s(tmpbuf, 128);
+    //_strtime_s(mpbuf, 128);
    // printf("OS time:\t%s\n", tmpbuf);
-    return (int)tmpbuf;
+    //return (int)tmpbuf;
+    return 1;
  }
 
 

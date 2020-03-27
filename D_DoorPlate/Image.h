@@ -4,6 +4,20 @@
 
 namespace ImageVerarbeitung {
 
+	class FileImg {
+	private:
+		std::string m_ImgPath;
+	public:
+		FileImg();
+		~FileImg();
+	};
+	class WriteImg {
+		WriteImg();
+		~WriteImg();
+	};
+	class ConvertImg {
+	};
+
 class Image 
 {
 private:

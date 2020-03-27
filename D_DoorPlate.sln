@@ -9,7 +9,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D_Database", "D_Database\D_
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "XbmConvert", "XbmConvert\XbmConvert.pyproj", "{2A6F3E7B-BC2F-4312-B6D9-0B298233FB1C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D_ArduinoPart", "D_ArduinoPart\D_ArduinoPart.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "D_Arduino", "D_Arduino\D_Arduino.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

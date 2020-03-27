@@ -15,11 +15,11 @@ class XBM_Converter():
         self.hexcode_path = "C:/Users/Administrator/Documents/Arduino/libraries/GxEPD/src/GxGDEW075Z09/BitmapExamples.h"
         self.hfile = "BitmapExamples.h"
 
-        if os.path.exists('image.png'):
+        if os.path.exists('Türschild.png'):
             os.system('xbm_convert.bat')
             os.rename("image.xbm", self.hfile)
             current_time = time.strftime("%Y%m%d-%H%M%S")
-            os.rename("image.png", "image_backup/image_"+current_time+".png")
+            os.rename("Türschild.png", "image_backup/image_"+current_time+".png")
 
             with open(self.hfile,"r") as xbm_r:
                 x = xbm_r.read()
