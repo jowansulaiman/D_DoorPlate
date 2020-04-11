@@ -8,7 +8,7 @@ namespace Database {
 
  class  Connection{
  private:
-  const char *m_Server;
+  const char *m_Host;
   const char *m_User;
   const char *m_Pass;
   const char *m_DB;
@@ -17,6 +17,7 @@ namespace Database {
   void Disconnect();
   
  protected:
+     
      MYSQL* m_Connect;
      Connection();
      Connection(const char*, const char*, const char*, const char*);
@@ -28,7 +29,7 @@ namespace Database {
  //***************************************************************************************//
  //***************************************************************************************//
  //***************************************************************************************//
-
+ 
 class Statement : public Connection{
  private:
   const char *m_Query; 

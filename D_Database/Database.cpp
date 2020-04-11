@@ -2,23 +2,22 @@
 
 
 
-Database::Connection::Connection()
-    : m_Server("localhost"),
+Database::Connection::Connection() : m_Host("localhost"),
       m_User("root"),
       m_Pass("test112"),
       m_DB("db"),
       m_Connect(mysql_init(m_Connect)) {}
 
 
-Database::Connection::Connection(const char* Server, const char* User, const char* Pass,
+Database::Connection::Connection(const char* Host, const char* User, const char* Pass,
                      const char* DB)
-    : m_Server(Server),
+    : m_Host(Host),
       m_User(User),
       m_Pass(Pass),
       m_DB(DB),
       m_Connect(mysql_init(m_Connect)) {}
 
-Database::Connection::~Connection() { std::cout << "dis"; }
+Database::Connection::~Connection() {  }
 
 
 void Database::Connection::Check_Error() {
@@ -30,22 +29,19 @@ void Database::Connection::Check_Error() {
 }
 
 void inline Database::Connection::Connect() {
-  Check_Error();     /* mit dem Server verbinden */
-  mysql_real_connect(m_Connect, m_Server, m_User, m_Pass, m_DB, 0, 0, 0);
+  mysql_real_connect(m_Connect, m_Host, m_User, m_Pass, m_DB, 0, 0, 0);
   Check_Error();
  }
+
 void Database::Connection::Disconnect() {
    if (m_Connect > 0) {
      mysql_close(m_Connect);
    } 
-}
-  
-
+} 
 // end of class Conn
 
 
-Database::Statement::Statement()
-    : Connection(),
+Database::Statement::Statement() : Connection(),
       m_Query("select * from kunde") { }
 
 Database::Statement::Statement(const char* Query) : m_Query(Query) {}
@@ -67,6 +63,8 @@ std::pair<char const*, char const*> Database::Statement::Query() {
     const char* arr[3];
     while ((row = mysql_fetch_row(result)) != NULL) {
         return std::make_pair(row[0], row[1]);
+        mysql_free_result(result);
+        
     }
     // {
     // /* std::cout << "id: " << (row[0] ? row[0] : "NULL") << " "
@@ -76,7 +74,6 @@ std::pair<char const*, char const*> Database::Statement::Query() {
     //
     //}       
     /* free the result set */
-    mysql_free_result(result);
 
     
     printf("Done.\n");

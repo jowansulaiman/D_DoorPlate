@@ -24,7 +24,7 @@
     <ClCompile Include="Image.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="DautmUhrzeit.cpp">
+    <ClCompile Include="DateTime.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +35,7 @@
     <ClInclude Include="Raum.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="DautmUhrzeit.h">
+    <ClInclude Include="DateTime.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
