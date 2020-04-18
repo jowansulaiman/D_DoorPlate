@@ -1,41 +1,36 @@
 
 #include <stdio.h>
-#include <stdlib.h>
+#include <map>
 #include <iostream>
 #include "Image.h"
-#include "Database.h"
-#include <map>
+#include "Query.h"
+#include <vector>
 #include <fstream>
 #include <iostream>
 #include <vector>
-#include <thread>
+#include <array>
 #include "DateTime.h"
-#include "C:\Users\jowan\OneDrive\Dokumente\Arduino\libraries"
-
-// Driver code
-//class date {
-//    int m, j, t;
-//public:
-//    date(int m_m, int m_j, int m_t):m(m_m), j(m_j), t(m_t) {
-//
-//    }
-//    friend ostream& operator << (ostream& os, const date& dt);
-//};
-//
-//ostream& operator << (ostream& os, const date& dt) {
-//  
-//    os << dt.t << "/" << dt.m << "/" << dt.j;
-//    return os;
-//}
 
 
+std::tuple<int, int, int> test(int a, int b, int c) {
+
+    return std::make_tuple(a, b, c);
+}
 
 int main()
 {
+    std::string x = "23.23.43.5";
 
-    std::shared_ptr< DateTime::ZeitStempel>s(new DateTime::ZeitStempel());
-    std::cout << s->get_Start_End_DateTime().first << " " << s->get_Start_End_DateTime().second;
-    
+    int y = std::stoi(x);
+
+    std::cout << y << std::endl;
+
+
+     //std::shared_ptr<Database::Statement>s(new Database::Statement("select room_id, designation from MeetingRoom where room_id >2"));
+     //std::cout << s->Query().first << " "; std::cout << s->Query().second;
+
+    //std::pair<std::pair<int,int>, std::pair<int, int>>as=std::make_pair(std::make_pair(12,12), std::make_pair(12,23));
+    //std::cout << as.first.first << as.first.second;
 }
 
 

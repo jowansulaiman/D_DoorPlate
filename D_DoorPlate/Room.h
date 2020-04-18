@@ -4,16 +4,16 @@
 
 
 
-class Raum {
+class _Room {
 private:
 	int m_RaumNr;
 	std::string m_Description;
-	bool checkRaum();
-
+	
 public:
-	Raum();
-	Raum(int, std::string);
-	~Raum();
+	_Room();
+	_Room(int, std::string);
+	std::pair<std::int64_t, std::string>getRoom_ID_Name();
+	~_Room();
 	
 };
 #endif // ! D_Raum

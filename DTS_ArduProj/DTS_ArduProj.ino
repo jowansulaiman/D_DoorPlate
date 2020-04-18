@@ -37,14 +37,28 @@ void setup()
     Serial.begin(115200);
     //Serial.println();
     Serial.println("setup");
+    pinMode(2, OUTPUT);
 
     display.init(115200);
-
+    display.setTextColor(GxEPD_BLACK);
+    
+    //display.println("Kallao");
+    display.println();
     Serial.println("setup done");
 }
 
 void loop()
 {
+
+    display.setCursor(0, 1);
+    display.println(analogRead(0));
+    display.println(".....");
+    //display.update();
+    digitalWrite(2, HIGH);
+    delay(0);
+    digitalWrite(2, LOW);
+    delay(0);
+
     /*display.fillScreen(GxEPD_WHITE);
     display.setTextColor(GxEPD_BLACK);
     display.setCursor(0, 0);
@@ -60,7 +74,6 @@ void loop()
     display.println("Jwoan test");
     delay(2);*/
     //showFont("Jowan ist ein Cooler Typ, und das ist war");
-    showBitmapExample(BitmapExample2);
     //delay(0);
 //#if !defined(__AVR)
     //showFont("Jowan", &FreeMonoBold9pt7b);

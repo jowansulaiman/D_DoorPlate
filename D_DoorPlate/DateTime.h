@@ -4,49 +4,42 @@
 #include <sys/timeb.h>
 #include <time.h>
 #include <ostream>
+#include<tuple>
+
 namespace DateTime {
 		class _Time {
 		private :
-			int m_Sec;
-			int m_Minute;
-			int m_Uhr;
+			int m_Sec, m_Minute, m_Uhr;
 
-		protected:
-			std::pair<std::string, std::string> check_Time();
-			
 		public:
 			_Time( int,  int,  int);
 			~_Time();
-			std::string get_Time();
-		//friend std::ostream& operator << (std::ostream& _OS, const  _Time& T);
+			std::tuple<int, int, int> get_Time();
 	};
 
 		class _Date {
 		private:
 			int m_Tag, m_Monat, m_Jahr;
-		
-		protected:
-			std::pair<std::string, std::string> check_Date();
 
 		public:
 			_Date( int,  int,  int);
 			~_Date();
-			std::string get_date();
+			std::tuple<int,int,int> get_Date();
 	};
 
-	class  ZeitStempel /*:public _Time, public _Date*/{
+	class  _DateTimeController /*:public _Time, public _Date*/{
 	private:
-		_Time m_start_Time;
-		_Time m_end_Time;
+		std::shared_ptr<_Time> m_start_Time;
+		std::shared_ptr<_Time> m_end_Time;
 
-		_Date m_start_Date;
-		_Date m_end_Date;
+		std::shared_ptr<_Date> m_start_Date;
+		std::shared_ptr<_Date> m_end_Date;
 
 	public:
-		ZeitStempel();
+		_DateTimeController(int day, int month, int year, int sec, int min, int hour);
 		void check_DateTime();
 		std::pair<std::string, std::string>get_Start_End_DateTime();
-		~ZeitStempel();
+		~_DateTimeController();
 	
 	};
 }

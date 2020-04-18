@@ -161,11 +161,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Database.cpp" />
+    <ClCompile Include="Connection.cpp" />
     <ClCompile Include="DBmain.cpp" />
+    <ClCompile Include="Query.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Database.h" />
+    <ClInclude Include="Connection.h" />
+    <ClInclude Include="Query.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -18,13 +18,16 @@
     <ClCompile Include="main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Raum.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Image.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="DateTime.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Reservation.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,10 +35,13 @@
     <ClInclude Include="Image.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Raum.h">
+    <ClInclude Include="DateTime.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="DateTime.h">
+    <ClInclude Include="Reservation.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

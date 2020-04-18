@@ -115,7 +115,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_world420d.lib;libmysql.lib;mysqlcppconn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_world420d.lib;mysqlcppconn.lib;libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Program Files\MySQL\MySQL Server 8.0\lib;C:\Program Files\MySQL\Connector C++ 8.0\lib64\vs14;C:\opencv\build\x64\vc15\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -163,12 +163,14 @@
     <ClCompile Include="DateTime.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Raum.cpp" />
+    <ClCompile Include="Room.cpp" />
+    <ClCompile Include="Reservation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="Image.h" />
-    <ClInclude Include="Raum.h" />
+    <ClInclude Include="Room.h" />
+    <ClInclude Include="Reservation.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\D_Database\D_Database.vcxproj">

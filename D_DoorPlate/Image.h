@@ -4,7 +4,7 @@
 #include <opencv.hpp>
 
 
-namespace ImageVerarbeitung {
+namespace Imagehandling {
 
 	class Image 
 {
