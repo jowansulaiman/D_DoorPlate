@@ -4,7 +4,7 @@
 Database::_Statement::_Statement(const char* Query) : m_Query(Query) {}
 Database::_Statement::~_Statement() { }
 
-std::pair<char const*, char const*> Database::_Statement::Query() {
+ char const* Database::_Statement::Query() {
 
     Connect();
    /* select_database("db");*/
@@ -18,13 +18,12 @@ std::pair<char const*, char const*> Database::_Statement::Query() {
         exit(0);
     }
     m_Result = mysql_store_result(m_Connect);
-
     while ((m_Row = mysql_fetch_row(m_Result))) {
-        mysql_free_result(m_Result);
-        mysql_next_result(m_Connect);
-        return std::make_pair(m_Row[0], m_Row[1]);
-
+        //mysql_free_result(m_Result);
+        //mysql_next_result(m_Connect);
+        return m_Row[0];
     }
+    //std::make_pair("", "");
 
 }
 

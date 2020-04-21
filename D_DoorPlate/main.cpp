@@ -10,27 +10,25 @@
 #include <vector>
 #include <array>
 #include "DateTime.h"
+#include "reservation.h"
 
+int main() {
 
-std::tuple<int, int, int> test(int a, int b, int c) {
+    std::shared_ptr<Database::_Statement>s(new Database::_Statement("select * from Meetingroom"));
+    for (size_t i = 0; i < 3; i++)
+    {
+        std::cout << s->Query();
+    }
 
-    return std::make_tuple(a, b, c);
-}
+   /* _Reservation r(20, 04, 2020, 25, 20, 17); 
+    std::cout << r.get_StartDateTime().first << " " << r.get_StartDateTime().second;*/
+   
 
-int main()
-{
-    std::string x = "23.23.43.5";
+    //DateTime::_DateTime t(20, 04, 2021, 12, 27, 9 /*end*/, 20, 05, 2021, 20, 28, 17);
+    //if (t.check_DateTime() == false) {
 
-    int y = std::stoi(x);
-
-    std::cout << y << std::endl;
-
-
-     //std::shared_ptr<Database::Statement>s(new Database::Statement("select room_id, designation from MeetingRoom where room_id >2"));
-     //std::cout << s->Query().first << " "; std::cout << s->Query().second;
-
-    //std::pair<std::pair<int,int>, std::pair<int, int>>as=std::make_pair(std::make_pair(12,12), std::make_pair(12,23));
-    //std::cout << as.first.first << as.first.second;
+    //    std::cerr << "feler datum" << std::endl;
+    //}
 }
 
 

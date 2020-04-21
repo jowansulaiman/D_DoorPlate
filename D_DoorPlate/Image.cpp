@@ -7,16 +7,16 @@
 using namespace cv;
 
 
-ImageVerarbeitung::Image::Image():m_filename("Türschild.png"), txt1("Deichstrasse"){  }
-ImageVerarbeitung::Image::Image(std::string f):txt1(f), m_filename("Türschild.png") {  }
-ImageVerarbeitung::Image::~Image() { std::cout << "dis"; }
+Imagehandling::Image::Image():m_filename("Türschild.png"), txt1("Deichstrasse"){  }
+Imagehandling::Image::Image(std::string f):txt1(f), m_filename("Türschild.png") {  }
+Imagehandling::Image::~Image() { std::cout << "dis"; }
 
-void ImageVerarbeitung::Image::showErrormsg(std::string msg, std::string bezeichnung) {
+void Imagehandling::Image::showErrormsg(std::string msg, std::string bezeichnung) {
 	std::cout << "Error: " << msg << bezeichnung << std::endl;
 	exit(0);
 }
 
-void ImageVerarbeitung::Image::readImg()
+void Imagehandling::Image::readImg()
 {
 	image = imread(m_filename);
 	if (image.data == 0)
@@ -44,7 +44,7 @@ void ImageVerarbeitung::Image::readImg()
 	system("magick ima.jpg ima.xbm");
 }
 
-void ImageVerarbeitung::Image::showWin(){
+void Imagehandling::Image::showWin(){
 namedWindow("DoorPlate", WINDOW_AUTOSIZE);
 imshow("DoorPlate", image);
 if (waitKey(0) == 7)
@@ -55,7 +55,7 @@ if (waitKey(0) == 7)
 }
 
 
-void ImageVerarbeitung::Image::convImg() {
+void Imagehandling::Image::convImg() {
 	char hfile[]= "BitmapExamples.h";
 	char re[]= "magick image.png image.xbm";
 	std::string old_txt = "#define image_width 640\n" 
@@ -79,7 +79,7 @@ void ImageVerarbeitung::Image::convImg() {
 }
 
 
-void ImageVerarbeitung::Image::findAndReplaceAll(std::string& data, std::string toSearch, std::string replaceStr)
+void Imagehandling::Image::findAndReplaceAll(std::string& data, std::string toSearch, std::string replaceStr)
 {
 	// Get the first occurrence
 	size_t pos = data.find(toSearch);

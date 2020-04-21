@@ -1,6 +1,6 @@
 
-#ifndef D_DateTime
-#define D_DateTime
+#ifndef DTS_DateTime_H
+#define DTS_DateTime_H
 #include <sys/timeb.h>
 #include <time.h>
 #include <ostream>
@@ -9,38 +9,37 @@
 namespace DateTime {
 		class _Time {
 		private :
-			int m_Sec, m_Minute, m_Uhr;
+			int m_Sec, m_Minute, m_Hour;
 
 		public:
-			_Time( int,  int,  int);
+			_Time(int Sec, int Minute, int Hour);
 			~_Time();
-			std::tuple<int, int, int> get_Time();
+			int get_Hour();
+			int get_Minute();
+			int get_Second();
 	};
 
 		class _Date {
 		private:
-			int m_Tag, m_Monat, m_Jahr;
+			int m_Day, m_Month, m_Year;
 
 		public:
-			_Date( int,  int,  int);
+			_Date(int Day, int Month, int Year);
 			~_Date();
-			std::tuple<int,int,int> get_Date();
+			int get_Year();
+			int get_Month();
+			int get_Day();
+
 	};
 
-	class  _DateTimeController /*:public _Time, public _Date*/{
-	private:
-		std::shared_ptr<_Time> m_start_Time;
-		std::shared_ptr<_Time> m_end_Time;
-
-		std::shared_ptr<_Date> m_start_Date;
-		std::shared_ptr<_Date> m_end_Date;
+	class  _DateTime:public _Time, public _Date{
 
 	public:
-		_DateTimeController(int day, int month, int year, int sec, int min, int hour);
-		void check_DateTime();
-		std::pair<std::string, std::string>get_Start_End_DateTime();
-		~_DateTimeController();
-	
+		_DateTime(int day, int month, int year, int sec, int min, int hour);
+		~_DateTime();
+
+		std::tuple<int, int, int> get_Time();
+		std::tuple<int, int, int> get_Date();
 	};
 }
-#endif // !D_DateTime
+#endif // !DTS_DateTime_H

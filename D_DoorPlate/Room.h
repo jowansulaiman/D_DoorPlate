@@ -1,19 +1,25 @@
-#ifndef  D_Raum
-#define D_Raum
-#include "Image.h"
+#ifndef  DTS_Raum_H
+#define DTS_Raum_H
+
+#include <map>
+#include <iostream>
 
 
 
 class _Room {
 private:
-	int m_RaumNr;
+	int m_RoomID;
+	int m_BoardID;
+
 	std::string m_Description;
 	
 public:
-	_Room();
-	_Room(int, std::string);
-	std::pair<std::int64_t, std::string>getRoom_ID_Name();
-	~_Room();
-	
+	_Room(int ID, std::string Description, int BoardID);
+	_Room(std::string Description, int BoardID);
+	_Room(int BoardID);
+	~_Room();	
+
+	std::map<int, std::string>get_Room();
+	int get_BoardID();
 };
-#endif // ! D_Raum
+#endif // ! DTS_Raum_H
