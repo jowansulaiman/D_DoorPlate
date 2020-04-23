@@ -7,7 +7,7 @@
 class _Reservation
 {
 private:
-	_Room room;
+	_Room m_Room;
 
 	std::shared_ptr<DateTime::_DateTime> m_Start;
 	std::shared_ptr<DateTime::_DateTime> m_End;
@@ -18,7 +18,7 @@ public:
 	_Reservation(int Day, int Month, int Year, int Sec, int Minute, int Hour);
 	~_Reservation();
 
-	bool is_Reservation_Deleted(DateTime::_DateTime& D);
+	bool is_Reservation_Deleted();
 	std::pair<std::string, std::string>  get_StartDateTime();
 };
 

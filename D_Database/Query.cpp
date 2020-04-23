@@ -4,11 +4,11 @@
 Database::_Statement::_Statement(const char* Query) : m_Query(Query) {}
 Database::_Statement::~_Statement() { }
 
- char const* Database::_Statement::Query() {
-
+std::list<char const*> Database::_Statement::Query() {
     Connect();
-   /* select_database("db");*/
-
+    //const char* txt[3];
+    std::list<char const*>result_List;
+    int i = 0;
     int state = mysql_real_query(m_Connect, m_Query, strlen(m_Query));
     Check_Error();
 
@@ -19,12 +19,11 @@ Database::_Statement::~_Statement() { }
     }
     m_Result = mysql_store_result(m_Connect);
     while ((m_Row = mysql_fetch_row(m_Result))) {
-        //mysql_free_result(m_Result);
-        //mysql_next_result(m_Connect);
-        return m_Row[0];
+       result_List.push_back(m_Row[3]);
+        //i++;
     }
-    //std::make_pair("", "");
-
+    mysql_free_result(m_Result);
+    return result_List;
 }
 
 //std::map<int, int, int, std::pair<int, int>> Database::Statement::getDateTime() {

@@ -18,8 +18,8 @@ void Imagehandling::Image::showErrormsg(std::string msg, std::string bezeichnung
 
 void Imagehandling::Image::readImg()
 {
-	image = imread(m_filename);
-	if (image.data == 0)
+	m_Image = imread(m_filename);
+	if (m_Image.data == 0)
 	{
 		showErrormsg("Check if ",m_filename + " exists in the folder.");
 	}
@@ -30,23 +30,23 @@ void Imagehandling::Image::readImg()
 	std::string txt3 = "23:30 - 23:59";
 	std::string txt4 = "Naechste Termine";
 	std::string txt5 = ".";
-	putText(image, txt, Point(2, 50/*+(i*60)*/), FONT_HERSHEY_DUPLEX, 1.4, Scalar(0, 0, 0), 2);
-	putText(image, txt1, Point(160, 110), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 0), 2);
-	putText(image, txt2, Point(2, 110), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 0), 2);
-	putText(image, txt3, Point(2, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 0), 1);
-	putText(image, txt4, Point(2, 200), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 0), 2);
+	putText(m_Image, txt, Point(2, 50/*+(i*60)*/), FONT_HERSHEY_DUPLEX, 1.4, Scalar(0, 0, 0), 2);
+	putText(m_Image, txt1, Point(160, 110), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 0), 2);
+	putText(m_Image, txt2, Point(2, 110), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 0), 2);
+	putText(m_Image, txt3, Point(2, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 0), 1);
+	putText(m_Image, txt4, Point(2, 200), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 0), 2);
 
-	putText(image, txt5, Point(500, 55), FONT_HERSHEY_DUPLEX, 15, Scalar(0, 0, 0), 12);
+	putText(m_Image, txt5, Point(500, 55), FONT_HERSHEY_DUPLEX, 15, Scalar(0, 0, 0), 12);
 	for (int i=0;i<3;i++)
-		putText(image, txt1+"     " +txt3, Point(2, 240 +(40*i)), FONT_HERSHEY_DUPLEX, 1, Scalar(102, 20, 0), 1);
-	imwrite("ima.jpg",image);
+		putText(m_Image, txt1+"     " +txt3, Point(2, 240 +(40*i)), FONT_HERSHEY_DUPLEX, 1, Scalar(102, 20, 0), 1);
+	imwrite("ima.jpg",m_Image);
 	//C:/Users/jowan/source/repos/killuahh/D_DoorPlate/D_DoorPlate/
 	system("magick ima.jpg ima.xbm");
 }
 
 void Imagehandling::Image::showWin(){
 namedWindow("DoorPlate", WINDOW_AUTOSIZE);
-imshow("DoorPlate", image);
+imshow("DoorPlate", m_Image);
 if (waitKey(0) == 7)
 {
 	exit(0);

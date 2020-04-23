@@ -2,7 +2,7 @@
 #define DST_Query_H
 #include "Connection.h"
 #include <iostream>
-#include <array>
+#include <list>
 #include <string>
 #include <malloc.h>
 
@@ -17,7 +17,7 @@ namespace Database {
         MYSQL_ROW m_Row;
 
     public:
-       char const* Query();
+        std::list<char const*> Query();
          std::pair<char const*, char const*> refust();
         _Statement(const char*);
         virtual ~_Statement();

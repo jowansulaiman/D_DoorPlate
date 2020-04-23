@@ -10,7 +10,7 @@ namespace Imagehandling {
 {
 private:
 	std::string m_filename;
-	cv::Mat image;
+	cv::Mat m_Image;
 	void convImg();
 	void showErrormsg(std::string, std::string);
 	void findAndReplaceAll(std::string&, std::string, std::string);
