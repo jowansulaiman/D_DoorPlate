@@ -3,6 +3,7 @@
 
 #include <map>
 #include <iostream>
+#include "Reservation.h"
 
 
 
@@ -15,11 +16,10 @@ private:
 	
 public:
 	_Room(int ID, std::string Description, int BoardID);
-	_Room(std::string Description, int BoardID);
-	_Room(int BoardID);
 	~_Room();	
 
-	std::map<int, std::string>get_Room();
+	std::string get_Room_name();
+	int get_Room_ID();
 	int get_BoardID();
 };
 #endif // ! DTS_Raum_H

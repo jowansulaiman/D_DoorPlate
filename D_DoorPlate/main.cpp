@@ -17,65 +17,60 @@
 #include <cassert>
 #include <boost/date_time.hpp>
 #include <boost/format.hpp>
-
-class dt
+void print(std::list<std::string>  list)
 {
-public:
-    int year;
-    int month;
-    int day;
-    int hour;
-    int min;
-    int sec;
-    int millisec;
-    void set(int year, int month, int day, int hour, int min, int sec, int millisec) {
-        this->year = year;
-        this->month = month;
-        this->day = day;
-        this->hour = hour;
-        this->min = min;
-        this->sec = sec;
-        this->millisec = millisec;
+    for (auto const& i : list) {
+        std::cout  << i << "\n";
     }
-    void print() {
-        std::cout << "y: " << year << " m: " << month << " d: " << day << " h: " << hour << " m: " << min << std::endl;
-    }
-    bool operator<(const dt& dt_);
-    bool operator==(const dt& dt_);
-    dt operator+(const dt& dt_);
-
-};
-dt dt::operator + (const dt& dt_)
-{
-    using namespace boost::posix_time;
-    using namespace boost::gregorian;
-
-    date thisDate(this->year, this->month, this->day);
-    date newDate = thisDate + years(dt_.year) + months(dt_.month) + days(dt_.day);
-
-    ptime newDateTime(newDate, hours(this->hour) + hours(dt_.hour) + minutes(this->min) + minutes(dt_.min) + seconds(this->sec) + seconds(dt_.sec) +
-        boost::posix_time::millisec(int(this->millisec)) + boost::posix_time::millisec(int(dt_.millisec)));
-
-    dt dateTime;
-
-    date t1_date = newDateTime.date();
-
-    dateTime.year = t1_date.year();
-    dateTime.month = t1_date.month();
-    dateTime.day = t1_date.day();
-
-    time_duration t1_time = newDateTime.time_of_day();
-
-    dateTime.hour = t1_time.hours();
-    dateTime.min = t1_time.minutes();
-    dateTime.sec = t1_time.seconds();
-    dateTime.millisec = t1_time.fractional_seconds() / 1000.0f;
-
-    return dateTime;
 }
-int main() {
 
-    //std::ifstream file1;
+class a {
+private:
+    int x;
+    std::string  b;
+public:
+    a(int x, std::string b):x(x), b(b){}
+    void dl() {
+        if (x > 5)
+            b = "";
+    }
+    std::string get_b() {
+        return b;
+    }
+};
+
+class b {
+private:
+    std::vector<a> ab;
+public:
+    b(){}
+    void print() {
+        for (auto d : ab) {
+            d.get_b();
+        }
+    }
+};
+
+int main() {
+    //std::shared_ptr<DateTime::_DateTime> t(new DateTime::_DateTime(12,11,2020,21,23,14));
+    //if (t->check_local_Time(t)==false)
+    //    std::cout << "kleiner ";
+
+  
+    
+
+for (int i=3; i>0; i--)
+    {
+        _Reservation r(27, 04, 2020, 23, 15, 16, 27, 04, 2020, 23, 59, 16);
+        print(r.get_Next_StartDateTime_Reservations().first); 
+        print(r.get_Next_StartDateTime_Reservations().second);
+        //print(r.get_Next_Time_Reservations().first);
+
+    }
+
+
+   
+   //std::ifstream file1;
     //file1.open("image.xbm", std::ios::in);
 
     //std::string txt;
@@ -98,24 +93,25 @@ int main() {
     //boost::replace_all(tyt, "}", " ");
 
     //std::cout << tyt; 
-    DateTime::_Time t(20, 12, 18);
-    DateTime::_Time t1(20, 12, 17);
-    //_DateTime new_DateTime(add_Year, add_Month, add_Day, add_Hour, add_Minute, add_Second);
-    //DateTime::_Time t2 = t1 + t;
-    if(t == t1)
-        std::cout << t.get_Time() << " " <<"";
+    //DateTime::_Date t(20, 11, 2021);
+    //DateTime::_Date t1(20, 12, 2022);
+    ////_DateTime new_DateTime(add_Year, add_Month, add_Day, add_Hour, add_Minute, add_Second);
+    //DateTime::_Date t2 = t1 + t;
+    ////if(t == t1)
+    //    std::cout << t2.get_Date() << " " <<"";
     //using namespace boost::posix_time;
     //using namespace boost::gregorian;
 
-    //DateTime::_DateTime t(20, 10, 2020, 21, 25, 14);
-    //DateTime::_DateTime t1(20, 10, 2020, 21, 25, 14);
+    //DateTime::_Time t(21, 25, 13);
+    //DateTime::_Time t1( 21, 25, 14);
+    //std::cout << t.get_LocalDate().get_Year();
     //DateTime::_DateTime t2 = t1 + t;
 
     //std::cout << t2.get_Date() << " " <<  t2.get_Time();
     //DateTime::_Date t1(20, 12, 2022);
-   
-    //if(t<t1)
-      //std::cout << t.get_Time();
+   /*
+    if(t!=t1)
+        std::cout << t.get_Time();*/
     //if (t > t1)
     //    std::cout << "True";//DateTime::_Time t2= t - t1;
 
@@ -206,24 +202,4 @@ int main() {
     std::this_thread::sleep_for(std::chrono::seconds(12));
   }*/
 
-bool dt::operator < (const dt& dt_)
-{
-    using namespace boost::posix_time;
-    using namespace boost::gregorian;
-
-    ptime thisTime(date(this->year, this->month, this->day), hours(this->hour) + minutes(this->min) + seconds(this->sec) + boost::posix_time::millisec(int(this->millisec)));
-    ptime thatTime(date(dt_.year, dt_.month, dt_.day), hours(dt_.hour) + minutes(dt_.min) + seconds(dt_.sec) + boost::posix_time::millisec(int(dt_.millisec)));
-
-    return thisTime < thatTime;
-}
-bool dt::operator == (const dt& dt_)
-{
-    using namespace boost::posix_time;
-    using namespace boost::gregorian;
-
-    ptime thisTime(date(this->year, this->month, this->day), hours(this->hour) + minutes(this->min) + seconds(this->sec) + boost::posix_time::millisec(int(this->millisec)));
-    ptime thatTime(date(dt_.year, dt_.month, dt_.day), hours(dt_.hour) + minutes(dt_.min) + seconds(dt_.sec) + boost::posix_time::millisec(int(dt_.millisec)));
-
-    return thisTime == thatTime;
-}
 
