@@ -169,17 +169,16 @@
   <ItemGroup>
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="Image.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Reservation.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DTS_DoorPlate.rc" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\D_Database\D_Database.vcxproj">
       <Project>{4653f677-d4bb-44c3-95f3-7995b97c9e12}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="DTS_DoorPlate.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

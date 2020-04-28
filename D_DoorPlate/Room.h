@@ -1,9 +1,9 @@
 #ifndef  DTS_Raum_H
 #define DTS_Raum_H
 
-#include <map>
 #include <iostream>
 #include "Reservation.h"
+#include <map>
 
 
 
@@ -11,15 +11,19 @@ class _Room {
 private:
 	int m_RoomID;
 	int m_BoardID;
-
-	std::string m_Description;
 	
+	std::vector<_Reservation> m_TotalReservations;
+
+	//_Reservation reservation;
+	std::string m_Description;
 public:
+
 	_Room(int ID, std::string Description, int BoardID);
 	~_Room();	
 
+	bool is_Reserved();
 	std::string get_Room_name();
 	int get_Room_ID();
-	int get_BoardID();
+	int get_Board_ID();
 };
 #endif // ! DTS_Raum_H

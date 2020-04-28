@@ -12,8 +12,8 @@
 #include <iostream>
 #include <vector>
 #include <array>
-#include "DateTime.h"
 #include "reservation.h"
+#include "room.h"
 #include <cassert>
 #include <boost/date_time.hpp>
 #include <boost/format.hpp>
@@ -22,51 +22,33 @@ void print(std::list<std::string>  list)
     for (auto const& i : list) {
         std::cout  << i << "\n";
     }
-}
-
-class a {
-private:
-    int x;
-    std::string  b;
-public:
-    a(int x, std::string b):x(x), b(b){}
-    void dl() {
-        if (x > 5)
-            b = "";
-    }
-    std::string get_b() {
-        return b;
-    }
-};
-
-class b {
-private:
-    std::vector<a> ab;
-public:
-    b(){}
-    void print() {
-        for (auto d : ab) {
-            d.get_b();
-        }
-    }
-};
-
+}  
 int main() {
     //std::shared_ptr<DateTime::_DateTime> t(new DateTime::_DateTime(12,11,2020,21,23,14));
     //if (t->check_local_Time(t)==false)
     //    std::cout << "kleiner ";
+    Database::_Statement s("select start from reservation, meetingroom where reservation.room_id = meetingroom.room_id and reservation.room_id = 4");
+    Database::_Statement y();
 
-  
-    
-
-for (int i=3; i>0; i--)
+    for (auto i : s.Query())
     {
-        _Reservation r(27, 04, 2020, 23, 15, 16, 27, 04, 2020, 23, 59, 16);
-        print(r.get_Next_StartDateTime_Reservations().first); 
-        print(r.get_Next_StartDateTime_Reservations().second);
+        std::cout << i << std::endl;
+    }
+   
+
+
+
+//_Reservation r(27, 04, 2020, 23, 59, 17, 27, 04, 2020, 23, 59, 18);
+//  //print(r.get_Next_StartDateTime_Reservations().first);_
+//_Room re(1, "kulle", 3);
+//if (re.is_Reserved() == false) {
+//    std::cout << "false";
+//}
+        //print(r.get_Next_StartDateTime_Reservations().second);
         //print(r.get_Next_Time_Reservations().first);
 
-    }
+
+
 
 
    

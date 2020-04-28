@@ -58,17 +58,27 @@ std::pair<std::list<std::string>, std::list<std::string>>  _Reservation::get_Nex
 }
 std::pair<std::list<std::string>, std::list<std::string>>  _Reservation::get_Next_EndDateTime_Reservations() {
 
-	std::list <std::string>startTime, endTime;
+	std::list <std::string>Date, Time;
 
 	while (check_Rreservation() != false)
 	{
-		if (startTime.empty()) {
-			startTime.push_back(m_StartDateTime->get_Time());
-			endTime.push_back(m_EndDateTime->get_Time());
+		if (Time.empty()) {
+			Date.push_back(m_EndDateTime->get_Date());
+			Time.push_back(m_EndDateTime->get_Time());
 		}
 		else
 			break;
 	}
 
-	return std::make_pair(startTime, endTime);
+	return std::make_pair(Date, Time);
 }
+//
+//int _Reservation::get_TimeSpan(){
+//	using namespace boost::gregorian;
+//	using namespace boost::posix_time;
+//
+//	//time_duration td(from_simple_string(m_StartDateTime->get_Time()));
+//
+//	 
+//	 return 1;
+//	}
