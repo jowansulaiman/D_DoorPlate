@@ -10,15 +10,15 @@ namespace DateTime {
 
 		class _Time {
 		private :
-			long int m_Sec, m_Minute, m_Hour;
+			long int  m_Minute, m_Hour;
 
 		public:
-			_Time(long int Sec, long int Minute, long int Hour);
+			_Time(long int Minute, long int Hour);
 			~_Time();
 
 			long int get_Hour();
 			long int get_Minute();
-			long int get_Second();
+		
 			std::string get_Time();
 			bool compare_local_Time(std::shared_ptr<_Time> _DT);
 			bool compare_Time(std::shared_ptr<_Time> _DT);
@@ -59,7 +59,7 @@ namespace DateTime {
 	class  _DateTime:public _Time, public _Date{
 
 	public:
-		_DateTime(long int day, long int month, long int year, long int sec, long int min, long int hour);
+		_DateTime(long int day, long int month, long int year, long int min, long int hour);
 		~_DateTime();
 		bool compare_local_DateTime(std::shared_ptr<_DateTime> _DT);
 

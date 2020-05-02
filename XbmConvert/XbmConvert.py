@@ -19,7 +19,7 @@ class XBM_Converter():
             os.system('magick image.png image.xbm')
             os.rename("image.xbm", self.hfile)
             current_time = time.strftime("%Y%m%d-%H%M%S")
-            os.rename("image.png", "image_backup/image_"+current_time+".png")
+            #os.rename("image.png", "image_backup/image_"+current_time+".png")
 
             with open(self.hfile,"r") as xbm_r:
                 x = xbm_r.read()

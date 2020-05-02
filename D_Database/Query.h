@@ -5,6 +5,7 @@
 #include <list>
 #include <string>
 #include <malloc.h>
+#include <stdlib.h>
 
 namespace Database {
 
@@ -17,8 +18,10 @@ namespace Database {
         MYSQL_ROW m_Row;
 
     public:
-        std::list<char const*> Query();
-         std::pair<char const*, char const*> refust();
+        std::list<char const*> StartDateTime();
+        std::list<char const*> EndDateTime();
+        bool is_cancelled();
+        std::pair<std::list<int>, std::list<const char*>> rooms();
         _Statement(const char*);
         virtual ~_Statement();
     };  // end of class Statement

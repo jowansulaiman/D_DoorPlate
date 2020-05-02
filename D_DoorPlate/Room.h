@@ -12,7 +12,7 @@ private:
 	int m_RoomID;
 	int m_BoardID;
 	
-	std::vector<_Reservation> m_TotalReservations;
+	std::vector<_Reservation*> m_TotalReservations;
 
 	//_Reservation reservation;
 	std::string m_Description;
@@ -22,6 +22,7 @@ public:
 	~_Room();	
 
 	bool is_Reserved();
+	void add_Room(int roomID, boost::posix_time::ptime start, boost::posix_time::ptime end);
 	std::string get_Room_name();
 	int get_Room_ID();
 	int get_Board_ID();
