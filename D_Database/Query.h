@@ -4,8 +4,6 @@
 #include <iostream>
 #include <list>
 #include <string>
-#include <malloc.h>
-#include <stdlib.h>
 
 namespace Database {
 
@@ -18,15 +16,19 @@ namespace Database {
         MYSQL_ROW m_Row;
 
     public:
-        std::list<char const*> StartDateTime();
-        std::list<char const*> EndDateTime();
-        bool is_cancelled();
+        std::list<std::string> StartDateTime(int room_id);
+        std::list<std::string> EndDateTime(int room_id);
         std::pair<std::list<int>, std::list<const char*>> rooms();
-        _Statement(const char*);
+        void delete_reservation(int roomid, int delevla, std::string start, std::string end);
+
+     std::string get_BoardID(int room_id);
+    public:
+        _Statement();
         virtual ~_Statement();
     };  // end of class Statement
 
 
 }  // namespace Database
+
 
 #endif // !DST_Query_H

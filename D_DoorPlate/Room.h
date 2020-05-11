@@ -11,20 +11,27 @@ class _Room {
 private:
 	int m_RoomID;
 	int m_BoardID;
-	
-	std::vector<_Reservation*> m_TotalReservations;
-
-	//_Reservation reservation;
 	std::string m_Description;
-public:
 
+	std::list <_Reservation> m_totalReservation;
+public:
 	_Room(int ID, std::string Description, int BoardID);
 	~_Room();	
 
-	bool is_Reserved();
-	void add_Room(int roomID, boost::posix_time::ptime start, boost::posix_time::ptime end);
-	std::string get_Room_name();
 	int get_Room_ID();
 	int get_Board_ID();
+	std::string get_Room_name();
+
+public:
+	bool is_Reserved();
+	void set_Reservation(_Reservation reservation);
+	std::list<_Reservation> get_Reservation();
+
+	/*std::list<std::string> get_NextReservation(std::shared_ptr<_Reservation> m_Reservation);
+	std::list<std::string> get_StartTime(std::shared_ptr<_Reservation> m_Reservation);
+	std::list<std::string> get_EndTime(std::shared_ptr<_Reservation> m_Reservation);*/
+
 };
+
+
 #endif // ! DTS_Raum_H

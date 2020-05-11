@@ -1,111 +1,65 @@
 
-#include <stdio.h>
-#include <iostream>
-#include <ostream>
-#include <string>
-#include <iterator>
 #include <iostream>
 #include "Image.h"
+#include "Room.h"
+#include "Reservation.h"
 #include "Query.h"
-#include <sstream>
-#include <fstream>
-#include <iostream>
-#include <vector>
-#include <array>
-#include "reservation.h"
-#include "room.h"
-#include <cassert>
-#include <boost/date_time.hpp>
-#include <boost/format.hpp>
+#include <list>
+#include "boost/date_time.hpp"
 
-template <class T>
-void print(std::list<T>  list)
-{
-    for (auto const& i : list) {
-        std::cout  << i << "\n";
-    }
-}  
 
-class a {
-private:
-    int x;
-    int b;
-public:
-    a(int x, int y):x(x),b(y)  {
-       
-    }
-    void print() {
-#ifndef print_
-#define print_
-        std::cout << x << " " << b << std::endl;
-#endif // !print_
+using namespace boost::gregorian;
+using namespace boost::posix_time;
 
-    }
+int main(){
+	do
+	{
+	std::shared_ptr<Database::_Statement> Abfragen ( new Database::_Statement);
+	std::shared_ptr<_Room> room(new _Room(1,"bille", 234));
+	std::shared_ptr<Imagehandling::Image> image(new Imagehandling::Image("Doorplate.png", "C:\\Users\\jowan\\source\\repos\\killuahh\\D_DoorPlate\\D_DoorPlate\\"));
+	
+	image->read_Img();
+	image->Write_Img_Room_Designstion(room->get_Room_name());
+	
+	std::pair<std::vector<std::string>, std::vector<std::string >> pai;
+	for (auto firstValeus : Abfragen->StartDateTime(room->get_Room_ID()))
+		pai.first.push_back(firstValeus);
+	for (auto secondValues : Abfragen->EndDateTime(room->get_Room_ID()))
+		pai.second.push_back(secondValues);
 
-    void check() {
-#ifdef print_
-        std::cout << "erfolg";  
-#endif // print_
+	for (size_t i = 0; i < pai.first.size(); i++)
+	{
+		date startReservation(from_simple_string(pai.first[i]));
+		date endReservation(from_simple_string(pai.second[i]));
+		
+		time_duration startTime(time_from_string(pai.first[i]).time_of_day());
+		time_duration endTime(time_from_string(pai.second[i]).time_of_day());
+		
+		_Reservation *reservation = new _Reservation(startReservation.day().as_number(), startReservation.month().as_number(), startReservation.year(), startTime.minutes(), startTime.hours(),
+					endReservation.day().as_number(), endReservation.month().as_number(), endReservation.year(), endTime.minutes(), endTime.hours());
+		
+		room->set_Reservation(*reservation);
+	}
+	
+	for (auto n: room->get_Reservation())
+	{		
+		if (n.check_Rreservation()==false)
+		{
+			if (n.check_ReservationDateTime_Validity() == false) {
+				image->Write_Img_DateSequence(n.get_Next_ReservationDate());//
+				image->Write_Img_TimeSequence(n.get_Next_ReservationStartTime(), n.get_Next_ReservationEndTime());
+			}
+		}
+	
+		image->Write_Img_Room_StateTime(n.get_Next_ReservationStartTime(), n.get_Next_ReservationEndTime(), n.check_Rreservation());
 
-    }
+	}
 
-};
+	image->show_img();
+	room->get_Reservation().clear();
+	Abfragen->Disconnect();
 
-class b {
-private:
-    std::vector<a*>c;
-    int b_id;
-public:
-    b(int aa) :b_id(aa) {
-
-    }
-    void add_a(a &s) {
-     
-            c.push_back(new a(2,3));
-      
-    }
-    void print() {
-        for (auto i:c)
-        {
-            i->print();
-        }
-    }
-};
-using namespace cv;
-using namespace std;
-
-int main() {
-
-    Imagehandling::Image Img("DoorPlate.png", "C:/Users/jowan/OneDrive/Desktop/");
-    Img.read_Img();
-    Img.Convert_Img();
+	std::this_thread::sleep_for(std::chrono::seconds(5));
+	} while (true);
+	return 0;
 }
-    
-
-
-    //Img.save_Img();
-   /* Database::_Statement s("");
-
-    print(s.rooms().first);
-    print(s.rooms().second);
-
-
-
-    using namespace boost::gregorian;
-    using namespace boost::posix_time;*/
-   
-    //for (auto i : s.StartDateTime())
-    //{
-    //    std::cout << i << std::endl;
-
-    //    //ptime dt(time_from_string(i));
-    //    //date d(from_simple_string(i));
-    //    //time_duration t(hours(d));
-    //    //std::cout << dt.date().year() << " " << (int)d.month() << " " << d.day() << std::endl;
-    //    //std::cout << dt.time_of_day().hours() << std::endl;
-    //}
- 
-
-
-
-

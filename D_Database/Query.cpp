@@ -1,17 +1,19 @@
 #include "Query.h"
 #include <vector>
 
-Database::_Statement::_Statement(const char* Query) : m_Query(Query) {}
+
+Database::_Statement::_Statement() {}
 Database::_Statement::~_Statement() { }
 
 
-std::list<char const*> 
-Database::_Statement::StartDateTime() {
+std::list<std::string>
+Database::_Statement::StartDateTime(int room_id) {
     Connect();
-    std::list<char const*>result_List;
-    const char*  Query = "select Start_DateTime from reservation";
+    std::list<std::string>result_List;
+    std::string Query = "select Start_DateTime from reservation where _room_id = " + std::to_string(room_id) + 
+        "  and is_deleted != 1 and id_cancelled !=1 GROUP BY Start_DateTime, end_DateTime  order by  Start_DateTime asc ";
 
-    int state = mysql_real_query(m_Connect, Query, strlen(Query));
+    int state = mysql_real_query(m_Connect, Query.c_str(), strlen(Query.c_str()));
     Check_Error();
 
     if (state) {
@@ -27,13 +29,14 @@ Database::_Statement::StartDateTime() {
     return result_List;
 }
 
-std::list<char const*>
-Database::_Statement::EndDateTime() {
+std::list<std::string>
+Database::_Statement::EndDateTime(int room_id) {
     Connect();
-    std::list<char const*>result_List;
-    const char* Query = "select Start_DateTime from reservation";
-
-    int state = mysql_real_query(m_Connect, Query, strlen(Query));
+    std::list<std::string> result_List;
+    std::string Query = "select end_DateTime from reservation where _room_id = " + std::to_string(room_id) +
+        "  and is_deleted != 1 and id_cancelled !=1 GROUP BY Start_DateTime, end_DateTime order by  Start_DateTime asc ";
+  
+    int state = mysql_real_query(m_Connect, Query.c_str(), strlen(Query.c_str()));
     Check_Error();
 
     if (state) {
@@ -44,19 +47,19 @@ Database::_Statement::EndDateTime() {
     m_Result = mysql_store_result(m_Connect);
     while ((m_Row = mysql_fetch_row(m_Result))) {
         result_List.push_back(m_Row[0]);
-        //i++;
     }
     mysql_free_result(m_Result);
     return result_List;
 }
 
-bool
-Database::_Statement::is_cancelled() {
+std::string
+Database::_Statement::get_BoardID(int room_id) {
     Connect();
-    bool result_List = false;
-    const char* Query = "select id_cancelled from reservation";
+    std::string first_result;
 
-    int state = mysql_real_query(m_Connect, Query, strlen(Query));
+    std::string Query =  " select board_id from meetingroom where room_id="+ std::to_string(room_id);
+
+    int state = mysql_real_query(m_Connect, Query.c_str(), strlen(Query.c_str()));
     Check_Error();
 
     if (state) {
@@ -66,16 +69,14 @@ Database::_Statement::is_cancelled() {
     }
     m_Result = mysql_store_result(m_Connect);
     while ((m_Row = mysql_fetch_row(m_Result))) {
-        result_List=m_Row[0];
+        first_result= std::stoi(m_Row[0]);
     }
     mysql_free_result(m_Result);
-    return result_List;
+    return first_result;
 }
 
 std::pair<std::list<int>, std::list<const char*>>
 Database::_Statement::rooms() {
-  
-    
    Connect();
    std::list<int>room_id;
    std::list<const char*>room_name;
@@ -98,3 +99,20 @@ Database::_Statement::rooms() {
    return std::make_pair(room_id, room_name);
 }
 
+void
+Database::_Statement::delete_reservation(int roomid, int deleval, std::string start, std::string end) {
+    Connect();
+    int first_result;
+    int second_result;
+
+    std::string Query = "update reservation set is_deleted =" + std::to_string(deleval) + " where _Room_ID =" + std::to_string(roomid) + " and Start_DateTime = '" + start + "' and end_DateTime =' " + end + "'";
+     
+    int state = mysql_real_query(m_Connect, Query.c_str(), strlen(Query.c_str()));
+    Check_Error();
+
+    if (state) {
+        std::cout << ("Die Anweisung(en) Konnte(n) nicht ausgeführt werden. ") << std::endl;
+        mysql_close(m_Connect);
+        exit(0);
+    }
+}

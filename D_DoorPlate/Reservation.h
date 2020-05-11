@@ -11,9 +11,6 @@ private:
 	std::shared_ptr<DateTime::_DateTime> m_StartDateTime;
 	std::shared_ptr<DateTime::_DateTime> m_EndDateTime;
 
-	bool m_cancelled;
-	bool m_deleted;
-
 public:
 	_Reservation(int Day, int Month, int Year, int Minute, int Hour,
 		int e_Day, int e_Month, int e_Year, int e_Minute, int e_Hour);
@@ -21,11 +18,11 @@ public:
 	~_Reservation();
 
 	bool check_Rreservation();
-	void check_Validity();
-	bool get_deleted();
+	bool check_ReservationDateTime_Validity();
 
-	std::pair<std::list<std::string>, std::list<std::string>> get_Next_StartDateTime_Reservations();
-	std::pair<std::list<std::string>, std::list<std::string>> get_Next_EndDateTime_Reservations();
+	std::list<std::string> get_Next_ReservationDate();
+	std::list<std::string> get_Next_ReservationEndTime();
+	std::list<std::string> get_Next_ReservationStartTime();
 };
 
 
