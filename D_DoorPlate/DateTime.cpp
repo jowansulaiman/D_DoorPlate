@@ -49,12 +49,16 @@ DateTime::_Time::compare_Time(std::shared_ptr<_Time> _DT) {
 
 std::string
 DateTime::_Time::get_Time() {
-    using namespace std;
 
-    stringstream stream;
-    stream << to_string(m_Hour) + ":" + to_string(m_Minute);
+    std::string houhr_to_string = std::to_string(m_Hour);
+    std::string minute_to_string = std::to_string(m_Minute);
 
-    return stream.str();
+    for (int i = 2 - houhr_to_string.size(); i > 0; i--) { houhr_to_string = "0" + houhr_to_string; }
+    for (int i = 2 - minute_to_string.size(); i > 0; i--) { minute_to_string = "0" + minute_to_string; }
+
+    std::string converted = houhr_to_string + ":" + minute_to_string;
+
+    return converted;
 }
 
 
@@ -168,12 +172,18 @@ DateTime::_Date::get_Day() {
 }
 std::string
 DateTime::_Date::get_Date() {
-    using namespace std;
     
-    stringstream stream;
-    stream << to_string(m_Day) + "." + to_string(m_Month) + "." + to_string(m_Year);
+    std::string year_to_string= std::to_string(m_Day);
+    std::string month_to_string= std::to_string(m_Month);
+    std::string day_to_string= std::to_string(m_Year);
 
-    return stream.str();
+    for (int i = 2 - year_to_string.size(); i > 0; i--) { year_to_string = "0" + year_to_string; }
+    for (int i = 2 - month_to_string.size(); i > 0; i--) { month_to_string = "0" + month_to_string; }
+    for (int i = 2 - day_to_string.size(); i > 0; i--) { day_to_string = "0" + day_to_string; }
+
+    std::string converted = year_to_string + "." + month_to_string + "." + day_to_string;
+
+    return converted;
 }
 
 bool
@@ -199,6 +209,20 @@ DateTime::_Date::compare_Date(std::shared_ptr<_Date> _DT) {
     ptime that_Date(date(_DT->get_Year(), _DT->get_Month(), _DT->get_Day()));
 
     if (this_Date < that_Date)
+        return false;
+}
+bool
+DateTime::_Date::equal_local_Date(std::shared_ptr<_Date> _DT) {
+    using namespace boost::posix_time;
+    using namespace boost::gregorian;
+    time_t now = time(0);
+    tm* ltm = localtime(&now);
+    int y = ltm->tm_year + 1900, mo = ltm->tm_mon + 1;
+
+    date local_Date(y, mo, ltm->tm_mday);
+    date that_Date(_DT->get_Year(), _DT->get_Month(), _DT->get_Day());
+
+    if (that_Date == local_Date)
         return false;
 }
 DateTime::_Date

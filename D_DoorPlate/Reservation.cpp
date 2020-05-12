@@ -10,7 +10,7 @@ _Reservation::~_Reservation() { }
 bool 
 _Reservation::check_Rreservation() {
 		//überprüffen, ob raum reserviert ist;
-	//if (m_StartDateTime->compare_Date(m_StartDateTime) != false && m_EndDateTime->compare_local_Date(m_EndDateTime) != false)//end > start
+	if (m_StartDateTime->equal_local_Date(m_StartDateTime) == false && m_EndDateTime->equal_local_Date(m_EndDateTime) == false)//end > start
 		if (m_StartDateTime->compare_local_Time(m_StartDateTime) == false && m_EndDateTime->compare_local_Time(m_EndDateTime) != false)//end > start
 			return true;
 		else

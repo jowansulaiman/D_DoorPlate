@@ -26,10 +26,14 @@ int main(){
 	image->Write_Img_Room_Designstion(room->get_Room_name());
 	
 	std::pair<std::vector<std::string>, std::vector<std::string >> pai;
+	
 	for (auto firstValeus : Abfragen->get_StartDateTime(room->get_Room_ID()))
 		pai.first.push_back(firstValeus);
+
 	for (auto secondValues : Abfragen->get_EndDateTime(room->get_Room_ID()))
 		pai.second.push_back(secondValues);
+
+
 
 	for (size_t i = 0; i < pai.first.size(); i++)
 	{
@@ -57,7 +61,6 @@ int main(){
 						image->Write_Img_TimeSequence(n.get_Next_ReservationStartTime(), n.get_Next_ReservationEndTime());
 						break;
 					}
-					
 				}
 			}
 			if (n.check_Rreservation() == true)
@@ -80,7 +83,11 @@ int main(){
 				image->Write_Img_Room_StateTime(firstResrvationTime, secondReservationTime, state);
 			}
 		}
-	
+		else
+		{
+			image->Write_Img_Room_StateTime(firstResrvationTime, secondReservationTime, false);
+		}
+		
 	image->Convert_Img();
 	image->set_place(0, 0);
 
@@ -100,6 +107,8 @@ int main(){
 	Abfragen->Disconnect();
 	incre = 0;
 	image->show_img();
+	firstResrvationTime.clear();
+	secondReservationTime.clear();
 
 	std::this_thread::sleep_for(std::chrono::seconds(5));
 	} while (true);

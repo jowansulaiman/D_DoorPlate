@@ -89,7 +89,7 @@ Imagehandling::Image::Write_Img_DateSequence(std::list<std::string> DateSequence
 	}
 	for (auto resu: DateSequence)
 	{
-			putText(m_Img, resu, Point(2, 240 + (40 * m_Dateincrement_place++)), FONT_HERSHEY_DUPLEX, 1, Scalar(0), 1);
+		putText(m_Img, resu, Point(2, 240 + (40 * m_Dateincrement_place++)), FONT_HERSHEY_DUPLEX, 1, Scalar(0), 1);
 	}
 	DateSequence.clear();
 	
@@ -99,7 +99,6 @@ void
 Imagehandling::Image::Write_Img_TimeSequence(std::list<std::string> Start_TimeSequence, std::list<std::string> End_TimeSequence) {
 	Check_Error();
 	std::string distance = " - ";
-	putText(m_Img, "Naechste Termine", Point(2, 200), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 0), 2);
 
 	if (Start_TimeSequence.empty() || End_TimeSequence.empty())
 	{
@@ -126,6 +125,7 @@ Imagehandling::Image::Write_Img_TimeSequence(std::list<std::string> Start_TimeSe
 void 
 Imagehandling::Image::Write_Img_Room_Designstion(std::string RoomDesignstion) {
 	Check_Error();
+	putText(m_Img, "Naechste Termine", Point(2, 200), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 0), 2);
 	putText(m_Img, RoomDesignstion, Point(2, 50), FONT_HERSHEY_DUPLEX, 1.4, Scalar(0, 0, 0), 2);
 }
 
@@ -135,7 +135,16 @@ Imagehandling::Image::Write_Img_Room_StateTime(std::string  Start_Time, std::str
 
 	time_t now = time(0);
 	tm* ltm = localtime(&now);
-	std::string localTime = std::to_string(ltm->tm_mday) + "." + std::to_string(ltm->tm_mon + 1) + "." + std::to_string(ltm->tm_year + 1900);
+
+	std::string day_to_string = std::to_string(ltm->tm_mday);
+	std::string monath_to_string = std::to_string(ltm->tm_mon + 1);
+	std::string year_to_string = std::to_string(ltm->tm_year + 1900);
+
+	for (int i = 2 - day_to_string.size(); i > 0; i--) { day_to_string = "0" + day_to_string; }
+	for (int i = 2 - monath_to_string.size(); i > 0; i--) { monath_to_string = "0" + monath_to_string; }
+	for (int i = 2 - year_to_string.size(); i > 0; i--) { year_to_string = "0" + year_to_string; }
+
+	std::string localTime = day_to_string + "." + monath_to_string + "." + year_to_string;
 	
 	putText(m_Img, "Aktuell - " + localTime, Point(2, 110), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 0), 2);
 	switch (state)
@@ -143,17 +152,10 @@ Imagehandling::Image::Write_Img_Room_StateTime(std::string  Start_Time, std::str
 		case true:
 			putText(m_Img, ".", Point(500, 55), FONT_HERSHEY_DUPLEX, 15, Scalar(0, 0, 255), 12);
 			putText(m_Img, Start_Time + " - " + End_Time, Point(2, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 255), 1);
-
-	/*		for (auto startresu: Start_Time)
-			{
-				for (auto endresu: End_Time)
-				{
-					break;
-				}
-			} */
 			break;
 		case false:
 			putText(m_Img, "Frei ", Point(2, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0), 1);
+			putText(m_Img, Start_Time + "  " + End_Time, Point(2, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 255), 1);
 			break;
 	default:
 		break;

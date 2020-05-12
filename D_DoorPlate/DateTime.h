@@ -6,6 +6,8 @@
 #include <ostream>
 #include <boost/date_time.hpp>
 #include <chrono>
+#include <boost/lexical_cast.hpp>
+
 namespace DateTime {
 
 		class _Time {
@@ -46,6 +48,7 @@ namespace DateTime {
 			std::string get_Date();
 			bool compare_local_Date(std::shared_ptr<_Date> _DT);
 			bool compare_Date(std::shared_ptr<_Date> _DT);
+			bool equal_local_Date(std::shared_ptr<_Date> _DT);
 
 		public:
 			_Date operator -(const _Date& _T);
