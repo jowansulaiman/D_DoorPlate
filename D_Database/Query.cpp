@@ -2,12 +2,12 @@
 #include <vector>
 
 
-Database::_Statement::_Statement() {}
-Database::_Statement::~_Statement() { }
+Database::_Query::_Query() {}
+Database::_Query::~_Query() { }
 
 
 std::list<std::string>
-Database::_Statement::StartDateTime(int room_id) {
+Database::_Query::get_StartDateTime(int room_id) {
     Connect();
     std::list<std::string>result_List;
     std::string Query = "select Start_DateTime from reservation where _room_id = " + std::to_string(room_id) + 
@@ -30,7 +30,7 @@ Database::_Statement::StartDateTime(int room_id) {
 }
 
 std::list<std::string>
-Database::_Statement::EndDateTime(int room_id) {
+Database::_Query::get_EndDateTime(int room_id) {
     Connect();
     std::list<std::string> result_List;
     std::string Query = "select end_DateTime from reservation where _room_id = " + std::to_string(room_id) +
@@ -53,7 +53,7 @@ Database::_Statement::EndDateTime(int room_id) {
 }
 
 std::string
-Database::_Statement::get_BoardID(int room_id) {
+Database::_Query::get_BoardID(int room_id) {
     Connect();
     std::string first_result;
 
@@ -76,7 +76,7 @@ Database::_Statement::get_BoardID(int room_id) {
 }
 
 std::pair<std::list<int>, std::list<const char*>>
-Database::_Statement::rooms() {
+Database::_Query::rooms() {
    Connect();
    std::list<int>room_id;
    std::list<const char*>room_name;
@@ -100,7 +100,7 @@ Database::_Statement::rooms() {
 }
 
 void
-Database::_Statement::delete_reservation(int roomid, int deleval, std::string start, std::string end) {
+Database::_Query::delete_reservation(int roomid, int deleval, std::string start, std::string end) {
     Connect();
     int first_result;
     int second_result;

@@ -10,7 +10,7 @@ using namespace cv;
 Imagehandling::Image::Image():m_filename("Türschild.png"){  }
 
 Imagehandling::Image::Image(std::string filename, std::string path):
-	 m_filename(filename), m_Path(path), Dateincrement_place(0), Timeincrement_place(0){ }
+	 m_filename(filename), m_Path(path), m_Dateincrement_place(0), m_Timeincrement_place(0){ }
 
 Imagehandling::Image::~Image() { }
 
@@ -89,11 +89,9 @@ Imagehandling::Image::Write_Img_DateSequence(std::list<std::string> DateSequence
 	}
 	for (auto resu: DateSequence)
 	{
-		
-		//for (int i = 0; i < 3; i++)
-			putText(m_Img, resu, Point(2, 240 + (40 * Dateincrement_place++)), FONT_HERSHEY_DUPLEX, 1, Scalar(0), 1);
+			putText(m_Img, resu, Point(2, 240 + (40 * m_Dateincrement_place++)), FONT_HERSHEY_DUPLEX, 1, Scalar(0), 1);
 	}
-	
+	DateSequence.clear();
 	
 }
 
@@ -110,7 +108,7 @@ Imagehandling::Image::Write_Img_TimeSequence(std::list<std::string> Start_TimeSe
 	}
 	else
 	{
-		int incre = Timeincrement_place++;
+		int incre = m_Timeincrement_place++;
 		for (auto resuStart : Start_TimeSequence) {
 			putText(m_Img, resuStart, Point(232, 240 + (40 * incre)), FONT_HERSHEY_DUPLEX, 1, Scalar(0), 1);
 			for (auto resuEnd : End_TimeSequence) {
@@ -118,8 +116,9 @@ Imagehandling::Image::Write_Img_TimeSequence(std::list<std::string> Start_TimeSe
 				break;
 			}
 		}
+		Start_TimeSequence.clear();
+		End_TimeSequence.clear();
 		putText(m_Img, distance, Point(320, 240 + (40 * incre)), FONT_HERSHEY_DUPLEX, 1, Scalar(0), 1);
-		
 	}
 
 }
@@ -131,7 +130,7 @@ Imagehandling::Image::Write_Img_Room_Designstion(std::string RoomDesignstion) {
 }
 
 void 
-Imagehandling::Image::Write_Img_Room_StateTime(std::list<std::string>  Start_Time, std::list<std::string>  End_Time, bool state) {
+Imagehandling::Image::Write_Img_Room_StateTime(std::string  Start_Time, std::string  End_Time, bool state) {
 	Check_Error();
 
 	time_t now = time(0);
@@ -143,15 +142,16 @@ Imagehandling::Image::Write_Img_Room_StateTime(std::list<std::string>  Start_Tim
 	{
 		case true:
 			putText(m_Img, ".", Point(500, 55), FONT_HERSHEY_DUPLEX, 15, Scalar(0, 0, 255), 12);
-			for (auto startresu: Start_Time)
+			putText(m_Img, Start_Time + " - " + End_Time, Point(2, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 255), 1);
+
+	/*		for (auto startresu: Start_Time)
 			{
 				for (auto endresu: End_Time)
 				{
-					putText(m_Img, startresu + " - " + endresu, Point(2, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 255), 1);
 					break;
 				}
-			} 
-			//break;
+			} */
+			break;
 		case false:
 			putText(m_Img, "Frei ", Point(2, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0), 1);
 			break;
@@ -160,7 +160,11 @@ Imagehandling::Image::Write_Img_Room_StateTime(std::list<std::string>  Start_Tim
 	}
 
 }
-
+void
+Imagehandling::Image::set_place(int first, int second) {
+	m_Dateincrement_place = first;
+	m_Timeincrement_place = second;
+}
 void 
 Imagehandling::Image::save_Img()
 {

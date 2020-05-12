@@ -182,8 +182,7 @@ DateTime::_Date::compare_local_Date(std::shared_ptr<_Date> _DT) {
     using namespace boost::gregorian;
     time_t now = time(0);
     tm* ltm = localtime(&now);
-    int y = ltm->tm_year + 1900;
-    int mo = ltm->tm_mon + 1;
+    int y = ltm->tm_year + 1900, mo = ltm->tm_mon + 1;
 
     ptime local_Date(date(y, mo, ltm->tm_mday));
     ptime that_Date(date(_DT->get_Year(), _DT->get_Month(), _DT->get_Day()));

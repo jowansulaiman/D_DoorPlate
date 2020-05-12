@@ -41,39 +41,7 @@ std::list<_Reservation>
 _Room::get_Reservation() {
 	return m_totalReservation;
 }
-//std::list<std::string>
-//_Room::get_NextReservation(std::shared_ptr<_Reservation> m_Reservation) {
-//
-//	std::list<std::string> resultList;
-//	if (is_Reserved() != true) {
-//		while (!(m_Reservation->get_Next_ReservationDate().empty()))
-//		{
-//			//resultList.push_back = (m_Reservation->get_Next_ReservationDate());
-//		}
-//	}
-//	return resultList;
-//}
-//
-//
-//std::list<std::string> 
-//_Room::get_StartTime(std::shared_ptr<_Reservation> m_Reservation) {
-//	std::list<std::string> ResultList;
-//	if (is_Reserved() != true) {
-//		while (!(m_Reservation->get_Next_ReservationStartEndTime().first.empty()))
-//		{
-//			//ResultList.push_back (m_Reservation->get_Next_ReservationStartEndTime().first);
-//		}
-//	}
-//	return ResultList;
-//}
-//std::list<std::string> 
-//_Room::get_EndTime(std::shared_ptr<_Reservation> m_Reservation) {
-//	std::list<std::string> ResultList;
-//	if (is_Reserved() != true) {
-//		while (!(m_Reservation->get_Next_ReservationStartEndTime().second.empty()))
-//		{
-//			//ResultList.push_back = (m_Reservation->get_Next_ReservationStartEndTime().second);
-//		}
-//	}
-//	return ResultList;
-//}
+void
+_Room::clear_total() {
+	m_totalReservation.clear();
+}

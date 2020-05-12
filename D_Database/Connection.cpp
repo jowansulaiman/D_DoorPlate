@@ -36,7 +36,6 @@ Database::_Connection::Connect() {
   m_Connect = mysql_init(m_Connect);
   Check_Error();
   mysql_real_connect(m_Connect, m_Host, m_User, m_Pass, m_DB, 0, 0, 0);
-  //std::cout << mysql_get_client_info() << std::endl;
  }
 
 void 

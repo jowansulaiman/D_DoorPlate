@@ -26,11 +26,7 @@ public:
 	bool is_Reserved();
 	void set_Reservation(_Reservation reservation);
 	std::list<_Reservation> get_Reservation();
-
-	/*std::list<std::string> get_NextReservation(std::shared_ptr<_Reservation> m_Reservation);
-	std::list<std::string> get_StartTime(std::shared_ptr<_Reservation> m_Reservation);
-	std::list<std::string> get_EndTime(std::shared_ptr<_Reservation> m_Reservation);*/
-
+	void clear_total();
 };
 
 

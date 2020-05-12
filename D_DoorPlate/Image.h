@@ -17,8 +17,8 @@ namespace Imagehandling {
 		std::string m_Path;
 		std::string m_filename;
 		cv::Mat m_Img;
-		int Dateincrement_place;
-		int Timeincrement_place;
+		int m_Dateincrement_place;
+		int m_Timeincrement_place;
 		void Check_Error();
 		
 	public:
@@ -32,8 +32,9 @@ namespace Imagehandling {
 	void Write_Img_DateSequence(std::list<std::string> DateSequence);
 	void Write_Img_TimeSequence(std::list<std::string> Start_TimeSequence, std::list<std::string> End_TimeSequence);
 	void Write_Img_Room_Designstion(std::string RoomDesignstion);
-	void Write_Img_Room_StateTime(std::list<std::string>  Start_Time, std::list<std::string>  End_Time, bool state);
+	void Write_Img_Room_StateTime(std::string  Start_Time,std::string End_Time, bool state);
 
+	void set_place(int first, int second);
 	void save_Img();
 	void show_img();
 

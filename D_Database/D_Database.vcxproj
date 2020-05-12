@@ -162,7 +162,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Connection.cpp" />
-    <ClCompile Include="DBmain.cpp" />
     <ClCompile Include="Query.cpp" />
   </ItemGroup>
   <ItemGroup>
