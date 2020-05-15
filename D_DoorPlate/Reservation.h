@@ -12,8 +12,8 @@ private:
 	std::shared_ptr<DateTime::_DateTime> m_EndDateTime;
 
 public:
-	_Reservation(int Day, int Month, int Year, int Minute, int Hour,
-		int e_Day, int e_Month, int e_Year, int e_Minute, int e_Hour);
+	_Reservation(int s_Day, int s_Month, int s_Year, int s_Sec, int s_Minute, int s_Hour,
+		int e_Day, int e_Month, int e_Year, int e_Sec, int e_Minute, int e_Hour);
 
 	~_Reservation();
 

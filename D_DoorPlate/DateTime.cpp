@@ -5,7 +5,7 @@
 #include <sys/timeb.h>
 #include <string>
 
-DateTime::_Time::_Time(long int Minute, long int Hour) :m_Minute(Minute), m_Hour(Hour) { }
+DateTime::_Time::_Time(long int Sec, long int Minute, long int Hour) :m_Minute(Minute), m_Hour(Hour), m_Sec(Sec) { }
 DateTime::_Time::~_Time(){  }
 
 long int 
@@ -49,14 +49,7 @@ DateTime::_Time::compare_Time(std::shared_ptr<_Time> _DT) {
 
 std::string
 DateTime::_Time::get_Time() {
-
-    std::string houhr_to_string = std::to_string(m_Hour);
-    std::string minute_to_string = std::to_string(m_Minute);
-
-    for (int i = 2 - houhr_to_string.size(); i > 0; i--) { houhr_to_string = "0" + houhr_to_string; }
-    for (int i = 2 - minute_to_string.size(); i > 0; i--) { minute_to_string = "0" + minute_to_string; }
-
-    std::string converted = houhr_to_string + ":" + minute_to_string;
+    std::string converted = std::to_string(m_Hour) + ":" + std::to_string(m_Minute) + ":" + std::to_string(m_Sec);
 
     return converted;
 }
@@ -68,7 +61,7 @@ DateTime::_Time::operator+(const _Time& _T) {
     unsigned  int add_Minute = this->m_Minute + _T.m_Minute;
 
 
-    _Time new_DateTime(add_Minute, add_Hour);
+    _Time new_DateTime(0, add_Minute, add_Hour);
 
     _T.~_Time();
     new_DateTime.~_Time();
@@ -84,7 +77,7 @@ DateTime::_Time::operator -(const _Time& _T) {
     long  int add_Minute = this->m_Minute - _T.m_Minute;
     (add_Minute < 0) ? add_Minute = add_Minute * -1 : add_Minute = add_Minute * 1;
 
-    _Time new_DateTime(add_Minute, add_Hour);
+    _Time new_DateTime(0, add_Minute, add_Hour);
 
     _T.~_Time();
     new_DateTime.~_Time();
@@ -200,6 +193,7 @@ DateTime::_Date::compare_local_Date(std::shared_ptr<_Date> _DT) {
     if (that_Date < local_Date)
         return false;
 }
+
 bool 
 DateTime::_Date::compare_Date(std::shared_ptr<_Date> _DT) {
     using namespace boost::posix_time;
@@ -312,7 +306,7 @@ DateTime::_Date::operator!=(_Date& _T) {
 // End of class _Date ************************************************************************************************
 
 
-DateTime::_DateTime::_DateTime(long int day, long int month, long int year, long int min, long int hour) : _Date(day, month, year), _Time(min, hour) { }
+DateTime::_DateTime::_DateTime(long int day, long int month, long int year, long int Sec,  long int min, long int hour) : _Date(day, month, year), _Time(Sec, min, hour) { }
 DateTime::_DateTime::~_DateTime(){ }
 
 bool 
@@ -329,9 +323,11 @@ DateTime::_DateTime::operator+( _DateTime _T) {
 
     long  int add_Hour = this->get_Hour() + _T.get_Hour();
     long  int add_Minute = this->get_Minute() + _T.get_Minute();
+
+
+    //long int day, long int month, long int year, long int Sec, long int min, long int hour
   
-   _DateTime new_DateTime(add_Year, add_Month, add_Day, add_Hour,
-       add_Minute);
+   _DateTime new_DateTime(add_Day, add_Month, add_Year, 0, add_Minute, add_Hour);
 
     _T.~_DateTime();
     new_DateTime.~_DateTime();
@@ -357,8 +353,7 @@ DateTime::_DateTime::operator -( _DateTime _T) {
     (add_Minute < 0) ? add_Minute = add_Minute * -1 : add_Minute = add_Minute * 1;
     
    
-
-    _DateTime new_DateTime(add_Day, add_Month, add_Year, add_Minute, add_Hour);
+    _DateTime new_DateTime(add_Day, add_Month, add_Year, 0, add_Minute, add_Hour);
 
     _T.~_DateTime();
     new_DateTime.~_DateTime();

@@ -12,10 +12,10 @@ namespace DateTime {
 
 		class _Time {
 		private :
-			long int  m_Minute, m_Hour;
+			long int  m_Minute, m_Hour, m_Sec;
 
 		public:
-			_Time(long int Minute, long int Hour);
+			_Time(long int Sec, long int Minute, long int Hour);
 			~_Time();
 
 			long int get_Hour();
@@ -62,7 +62,7 @@ namespace DateTime {
 	class  _DateTime:public _Time, public _Date{
 
 	public:
-		_DateTime(long int day, long int month, long int year, long int min, long int hour);
+		_DateTime(long int day, long int month, long int year, long int Sec, long int min, long int hour);
 		~_DateTime();
 		bool compare_local_DateTime(std::shared_ptr<_DateTime> _DT);
 

@@ -8,6 +8,7 @@
 #include <boost/range/adaptors.hpp>
 #include<boost/iostreams/seek.hpp>
 #include <boost/range/algorithm.hpp>
+#include <boost/date_time.hpp>
 
 namespace Imagehandling {
 	

@@ -109,9 +109,32 @@ Imagehandling::Image::Write_Img_TimeSequence(std::list<std::string> Start_TimeSe
 	{
 		int incre = m_Timeincrement_place++;
 		for (auto resuStart : Start_TimeSequence) {
-			putText(m_Img, resuStart, Point(232, 240 + (40 * incre)), FONT_HERSHEY_DUPLEX, 1, Scalar(0), 1);
+			resuStart = "1900.01.01 " + resuStart;
+			boost::posix_time::time_duration get_StartTime(boost::posix_time::time_from_string(resuStart).time_of_day());
+
+			std::string houhr_to_string = std::to_string(get_StartTime.hours());
+			std::string minute_to_string = std::to_string(get_StartTime.minutes());
+
+			for (int i = 2 - houhr_to_string.size(); i > 0; i--) { houhr_to_string = "0" + houhr_to_string; }
+			for (int i = 2 - minute_to_string.size(); i > 0; i--) { minute_to_string = "0" + minute_to_string; }
+
+			std::string s_Time = houhr_to_string + ":" + minute_to_string;
+
+			putText(m_Img, s_Time, Point(232, 240 + (40 * incre)), FONT_HERSHEY_DUPLEX, 1, Scalar(0), 1);
+
 			for (auto resuEnd : End_TimeSequence) {
-				putText(m_Img, resuEnd, Point(372, 240 + (40 * incre)), FONT_HERSHEY_DUPLEX, 1, Scalar(0), 1);
+				resuEnd = "1900.01.01 " + resuEnd;
+				boost::posix_time::time_duration get_EndTime(boost::posix_time::time_from_string(resuEnd).time_of_day());
+
+				std::string e_houhr_to_string = std::to_string(get_EndTime.hours());
+				std::string e_minute_to_string = std::to_string(get_EndTime.minutes());
+
+				for (int i = 2 - e_houhr_to_string.size(); i > 0; i--) { e_houhr_to_string = "0" + e_houhr_to_string; }
+				for (int i = 2 - e_minute_to_string.size(); i > 0; i--) { e_minute_to_string = "0" + e_minute_to_string; }
+
+				std::string e_Time = e_houhr_to_string + ":" + e_minute_to_string;
+
+				putText(m_Img, e_Time, Point(372, 240 + (40 * incre)), FONT_HERSHEY_DUPLEX, 1, Scalar(0), 1);
 				break;
 			}
 		}
@@ -147,15 +170,42 @@ Imagehandling::Image::Write_Img_Room_StateTime(std::string  Start_Time, std::str
 	std::string localTime = day_to_string + "." + monath_to_string + "." + year_to_string;
 	
 	putText(m_Img, "Aktuell - " + localTime, Point(2, 110), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 0), 2);
+	std::string s_Time;
+	std::string e_Time;
+	if (!Start_Time.empty())
+	{
+		Start_Time = "1900.01.01 " + Start_Time;
+		End_Time = "1900.01.01 " + End_Time;
+
+		boost::posix_time::time_duration get_StartTime(boost::posix_time::time_from_string(Start_Time).time_of_day());
+		boost::posix_time::time_duration get_EndtTime(boost::posix_time::time_from_string(End_Time).time_of_day());
+
+
+		std::string s_houhr_to_string = std::to_string(get_StartTime.hours());
+		std::string s_minute_to_string = std::to_string(get_StartTime.minutes());
+
+		std::string e_houhr_to_string = std::to_string(get_EndtTime.hours());
+		std::string e_minute_to_string = std::to_string(get_EndtTime.minutes());
+
+		for (int i = 2 - s_houhr_to_string.size(); i > 0; i--) { s_houhr_to_string = "0" + s_houhr_to_string; }
+		for (int i = 2 - s_minute_to_string.size(); i > 0; i--) { s_minute_to_string = "0" + s_minute_to_string; }
+
+		for (int i = 2 - e_houhr_to_string.size(); i > 0; i--) { e_houhr_to_string = "0" + e_houhr_to_string; }
+		for (int i = 2 - e_minute_to_string.size(); i > 0; i--) { e_minute_to_string = "0" + e_minute_to_string; }
+		
+		s_Time = s_houhr_to_string + ":" + s_minute_to_string;
+		e_Time = e_houhr_to_string + ":" + e_minute_to_string;
+	}	
+
 	switch (state)
 	{
 		case true:
 			putText(m_Img, ".", Point(500, 55), FONT_HERSHEY_DUPLEX, 15, Scalar(0, 0, 255), 12);
-			putText(m_Img, Start_Time + " - " + End_Time, Point(2, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 255), 1);
+			putText(m_Img, s_Time + " - " + e_Time, Point(2, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 255), 1);
 			break;
 		case false:
 			putText(m_Img, "Frei ", Point(2, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0), 1);
-			putText(m_Img, Start_Time + "  " + End_Time, Point(2, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 255), 1);
+			putText(m_Img, " ", Point(2, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 255), 1);
 			break;
 	default:
 		break;

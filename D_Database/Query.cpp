@@ -100,7 +100,7 @@ Database::_Query::rooms() {
 }
 
 void
-Database::_Query::delete_reservation(int roomid, int deleval, std::string start, std::string end) {
+Database::_Query::delete_reservation(int roomid, bool deleval, std::string start, std::string end) {
     Connect();
     int first_result;
     int second_result;

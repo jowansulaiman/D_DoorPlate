@@ -19,7 +19,7 @@ namespace Database {
         std::list<std::string> get_StartDateTime(int room_id);
         std::list<std::string> get_EndDateTime(int room_id);
         std::pair<std::list<int>, std::list<const char*>> rooms();
-        void delete_reservation(int roomid, int delevla, std::string start, std::string end);
+        void delete_reservation(int roomid, bool delevla, std::string start, std::string end);
 
      std::string get_BoardID(int room_id);
     public:
