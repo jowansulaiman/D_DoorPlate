@@ -32,8 +32,9 @@ namespace Imagehandling {
 	void read_Img();
 	void Write_Img_DateSequence(std::list<std::string> DateSequence);
 	void Write_Img_TimeSequence(std::list<std::string> Start_TimeSequence, std::list<std::string> End_TimeSequence);
+	void Write_Img_TimeDifference(std::list<std::string> Start_TimeSequence, std::list<std::string> End_TimeSequence);
 	void Write_Img_Room_Designstion(std::string RoomDesignstion);
-	void Write_Img_Room_StateTime(std::string  Start_Time,std::string End_Time, bool state);
+	void Write_Img_Room_StateTime(std::vector<std::string>  Start_Time, std::vector<std::string> End_Time, bool state);
 
 	void set_place(int first, int second);
 	void save_Img();

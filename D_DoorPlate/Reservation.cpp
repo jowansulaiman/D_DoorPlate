@@ -23,7 +23,10 @@ _Reservation::check_ReservationDateTime_Validity() {
 		if (m_StartDateTime->compare_local_Date(m_StartDateTime) == false || m_EndDateTime->compare_local_Date(m_EndDateTime) == false) 
 			return  true;
 
-		else if (m_StartDateTime->equal_local_Date(m_StartDateTime) == false && m_EndDateTime->equal_local_Date(m_EndDateTime) != false)
+		else if (m_StartDateTime->equal_local_Date(m_StartDateTime) == false && m_EndDateTime->equal_local_Date(m_EndDateTime) == true)
+			return true;
+
+		else if (m_StartDateTime->equal_local_Date(m_StartDateTime) == true && m_EndDateTime->equal_local_Date(m_EndDateTime) == false)
 			return true;
 
 		else if (m_StartDateTime->equal_local_Date(m_StartDateTime) == false && m_EndDateTime->equal_local_Date(m_EndDateTime) == false && m_EndDateTime->compare_local_Time(m_EndDateTime) == false)
@@ -35,24 +38,37 @@ _Reservation::check_ReservationDateTime_Validity() {
 		else if (m_EndDateTime->compare_Date(m_StartDateTime) == false && m_EndDateTime->compare_Time(m_StartDateTime) == false) 
 			return  true;
 
+		else if (m_EndDateTime->compare_Date(m_StartDateTime) == false)
+			return  true;
+
+		else if (m_StartDateTime->compare_Date(m_EndDateTime)==false)
+			return  true;
+
 		else
 			return false;
 }
 
  std::list<std::string>
-_Reservation::get_Next_ReservationDate() {
+_Reservation::get_Next_Reservation_StartDate() {
 	std::list <std::string>Date;
 		Date.push_back(m_StartDateTime->get_Date());
 	return Date;
 }
+ 
+ std::list<std::string>
+ _Reservation::get_Next_Reservation_EndDate() {
+	 std::list <std::string>Date;
+	 Date.push_back(m_EndDateTime->get_Date());
+	 return Date;
+ }
  std::list<std::string> 
-_Reservation::get_Next_ReservationStartTime() {
+_Reservation::get_Next_Reservation_StartTime() {
 	 std::list <std::string>StartTime;
 	 StartTime.push_back(m_StartDateTime->get_Time());
 	 return StartTime;
  }
  std::list<std::string> 
-_Reservation::get_Next_ReservationEndTime() {
+_Reservation::get_Next_Reservation_EndTime() {
 	 std::list <std::string>EndTime;
 	 EndTime.push_back(m_EndDateTime->get_Time());
 	 return EndTime;

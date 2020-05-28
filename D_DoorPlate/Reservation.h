@@ -20,9 +20,10 @@ public:
 	bool check_Rreservation();
 	bool check_ReservationDateTime_Validity();
 
-	std::list<std::string> get_Next_ReservationDate();
-	std::list<std::string> get_Next_ReservationEndTime();
-	std::list<std::string> get_Next_ReservationStartTime();
+	std::list<std::string> get_Next_Reservation_StartDate();
+	std::list<std::string> get_Next_Reservation_EndDate();
+	std::list<std::string> get_Next_Reservation_EndTime();
+	std::list<std::string> get_Next_Reservation_StartTime();
 };
 
 

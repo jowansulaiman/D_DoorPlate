@@ -5,6 +5,7 @@
 #include "Reservation.h"
 #include "Query.h"
 #include <list>
+#include <vector>
 #include "boost/date_time.hpp"
 
 
@@ -13,7 +14,7 @@ void Hide_Console()
 	HWND Stealth;
 	AllocConsole();
 	Stealth = FindWindowA("ConsoleWindowClass", NULL);
-	ShowWindow(Stealth, 0);
+	ShowWindow(Stealth, 1);
 }
 
 using namespace boost::gregorian;
@@ -26,9 +27,8 @@ int main(){
 	std::shared_ptr<_Room> room(new _Room(1, "bille", 234));
 	std::shared_ptr<Imagehandling::Image> image(new Imagehandling::Image("Doorplate.png", "C:\\Users\\jowan\\source\\repos\\killuahh\\D_DoorPlate\\D_DoorPlate\\"));
 
-	bool state = false;
 	int incre = 0;
-	std::string firstResrvationTime, secondReservationTime;
+	std::vector<std::string> firstResrvationTime, secondReservationTime;
 	do
 	{
 		image->read_Img();
@@ -63,38 +63,52 @@ int main(){
 					incre++;
 					while (incre < 5)
 					{
-						image->Write_Img_DateSequence(n.get_Next_ReservationDate());
-						image->Write_Img_TimeSequence(n.get_Next_ReservationStartTime(), n.get_Next_ReservationEndTime());
+						image->Write_Img_DateSequence(n.get_Next_Reservation_StartDate());
+						image->Write_Img_TimeDifference(n.get_Next_Reservation_StartTime(), n.get_Next_Reservation_EndTime());
+						image->Write_Img_TimeSequence(n.get_Next_Reservation_StartTime(), n.get_Next_Reservation_EndTime());
 						break;
 					}
 				}
 				else
 				{
-					std::pair< std::vector<std::string>, std::vector<std::string>> invalidly_Value;
+					std::pair<std::vector<std::string>, std::vector<std::string>> invalidly_Value;
 
-					for (auto dae:n.get_Next_ReservationDate())
+					for (auto get_invalidly_Start_DateTime:n.get_Next_Reservation_StartDate())
 					{
-						date start_Date_Reservation(from_uk_string(dae));
-						std::string start_DateTime_invalidly;
-						std::string End_DateTime_invalidly;
+						date start_Date_Reservation(from_uk_string(get_invalidly_Start_DateTime));
 
-						start_DateTime_invalidly = std::to_string(start_Date_Reservation.year()) + "-" + std::to_string(start_Date_Reservation.month().as_number()) + "-" + std::to_string(start_Date_Reservation.day().as_number());
-						End_DateTime_invalidly = std::to_string(start_Date_Reservation.year()) + "-" + std::to_string(start_Date_Reservation.month().as_number()) + "-" + std::to_string(start_Date_Reservation.day().as_number());
-						for (auto deleteStart : n.get_Next_ReservationStartTime())
+						std::string start_DateTime_invalidly;
+
+						start_DateTime_invalidly = std::to_string(start_Date_Reservation.year()) + "-" + 
+							std::to_string(start_Date_Reservation.month().as_number()) + "-" + std::to_string(start_Date_Reservation.day().as_number());
+						
+						for (auto deleteStart : n.get_Next_Reservation_StartTime())
 						{
 							start_DateTime_invalidly = start_DateTime_invalidly + " " + deleteStart;
 							break;
 						}
+						invalidly_Value.first.push_back(start_DateTime_invalidly);
+					} 
 
-						for (auto deleteEnd : n.get_Next_ReservationEndTime())
+					for (auto get_invalidly_End_DateTime: n.get_Next_Reservation_EndDate())
+					{
+						date end_Date_Reservation(from_uk_string(get_invalidly_End_DateTime));
+
+						std::string  End_DateTime_invalidly;
+
+						End_DateTime_invalidly = std::to_string(end_Date_Reservation.year()) + "-" +
+							std::to_string(end_Date_Reservation.month().as_number()) + "-" + std::to_string(end_Date_Reservation.day().as_number());
+						
+
+						for (auto deleteEnd : n.get_Next_Reservation_EndTime())
 						{
 							End_DateTime_invalidly = End_DateTime_invalidly + " " + deleteEnd;
 							break;
 						}
 
-						invalidly_Value.first.push_back(start_DateTime_invalidly);
 						invalidly_Value.second.push_back(End_DateTime_invalidly);
 					}
+
 					for (size_t i = 0; i < invalidly_Value.first.size(); i++)
 					{
 						Abfragen->delete_reservation(room->get_Room_ID(), true, invalidly_Value.first[i], invalidly_Value.second[i]);
@@ -103,38 +117,29 @@ int main(){
 			}
 			if (n.check_Rreservation() == true)
 			{
-				for (auto s : n.get_Next_ReservationStartTime())
+				for (auto s : n.get_Next_Reservation_StartTime())
 				{
-					firstResrvationTime = s;
+					firstResrvationTime.push_back(s);
 				}
-				for (auto e : n.get_Next_ReservationEndTime())
-
+				for (auto e : n.get_Next_Reservation_EndTime())
 				{
-					secondReservationTime = e;
+					secondReservationTime.push_back(e);
 				}
 			}
 		}
 		if (!firstResrvationTime.empty() && !secondReservationTime.empty())
-		{
-			state = true;
-			if (state==true)
-			{
-				image->Write_Img_Room_StateTime(firstResrvationTime, secondReservationTime, state);
-			}
-		}
+		{ image->Write_Img_Room_StateTime(firstResrvationTime, secondReservationTime, true);  }
 		else
-		{
-			image->Write_Img_Room_StateTime(firstResrvationTime, secondReservationTime, false);
-		}
+		{ image->Write_Img_Room_StateTime(firstResrvationTime, secondReservationTime, false); }
 		
 	image->Convert_Img();
 	image->set_place(0, 0);
 
 	for (auto cle: room->get_Reservation())
 	{
-		cle.get_Next_ReservationDate().clear();
-		cle.get_Next_ReservationEndTime().clear();
-		cle.get_Next_ReservationStartTime().clear();
+		cle.get_Next_Reservation_StartDate().clear();
+		cle.get_Next_Reservation_EndTime().clear();
+		cle.get_Next_Reservation_StartTime().clear();
 	}
 
 	get_DateTime.first.clear(); 	get_DateTime.second.clear();
@@ -147,7 +152,7 @@ int main(){
 	image->show_img();
 	firstResrvationTime.clear(); 	secondReservationTime.clear();
 
-	std::this_thread::sleep_for(std::chrono::seconds(5));
+	std::this_thread::sleep_for(std::chrono::seconds(2));
 	} while (true);
 
 	return 0;
