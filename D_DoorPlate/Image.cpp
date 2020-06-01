@@ -256,6 +256,7 @@ Imagehandling::Image::Write_Img_Room_StateTime(std::vector<std::string>  Start_T
 			putText(m_Img, end_result , Point(2, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 255), 1);
 			break;
 		case false:
+			end_result.clear();
 			putText(m_Img, "Frei ", Point(2, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0), 1);
 			putText(m_Img, " ", Point(2, 150), FONT_HERSHEY_DUPLEX, 1, Scalar(0, 0, 255), 1);
 			break;

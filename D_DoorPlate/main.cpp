@@ -28,14 +28,14 @@ int main(){
 	std::shared_ptr<Imagehandling::Image> image(new Imagehandling::Image("Doorplate.png", "C:\\Users\\jowan\\source\\repos\\killuahh\\D_DoorPlate\\D_DoorPlate\\"));
 
 	int incre = 0;
-	std::vector<std::string> firstResrvationTime, secondReservationTime;
 	do
 	{
+		std::vector<std::string> firstResrvationTime, secondReservationTime;
+		std::pair<std::vector<std::string>, std::vector<std::string >> get_DateTime;
+
 		image->read_Img();
 		image->Write_Img_Room_Designstion(room->get_Room_name());
-		
-		std::pair<std::vector<std::string>, std::vector<std::string >> get_DateTime;
-		
+
 		for (auto firstValeus : Abfragen->get_StartDateTime(room->get_Room_ID()))
 			get_DateTime.first.push_back(firstValeus);
 		for (auto secondValues : Abfragen->get_EndDateTime(room->get_Room_ID()))
@@ -131,7 +131,6 @@ int main(){
 		{ image->Write_Img_Room_StateTime(firstResrvationTime, secondReservationTime, true);  }
 		else
 		{ image->Write_Img_Room_StateTime(firstResrvationTime, secondReservationTime, false); }
-		
 	image->Convert_Img();
 	image->set_place(0, 0);
 
